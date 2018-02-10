@@ -39,10 +39,16 @@ void KAPDelay::reset()
 void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inWetDry,
                        float inOutputGain, float* outAudio, int inNumSamplesToRender)
 {
+    const float time = kap_time_signature(inTime);
     const float wet = inWetDry;
     const float dry = 1.f - wet;
+
+    float gainMapped = jmap(inOutputGain, 0.f, 1.f, -24.f, 24.f);
+    gainMapped = Decibels::decibelsToGain(gainMapped, -24.f);
     
-    const float time = kap_delay_timing(inTime);
+    const float feedbackMapped = jmap(inFeedback, 0.f, 1.f, 0.f, 0.95f);
+    
+    mGainSmoothed = mGainSmoothed - kKAPParamSmoothCoeff_Generic*(mGainSmoothed-gainMapped);
         
     for(int i = 0; i < inNumSamplesToRender; i++){
         
@@ -51,13 +57,13 @@ void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inW
         const double delayTimeInSamples = (mSampleRate * mTimeSmoothed);
         const double sample = getInterpolatedSample(delayTimeInSamples);
         
-        mBuffer[mDelayIndex] = inAudio[i] + (mFeedbackSample * inFeedback);
+        mBuffer[mDelayIndex] = inAudio[i] + (mFeedbackSample * feedbackMapped);
         
         kapassert_isnan(sample);
         
         mFeedbackSample = sample;
         
-        outAudio[i] = inAudio[i]*dry + sample*wet;
+        outAudio[i] = (inAudio[i]*dry + sample*wet) * mGainSmoothed;
         
         mDelayIndex = mDelayIndex + 1;
         
@@ -72,7 +78,7 @@ double KAPDelay::getInterpolatedSample(float inDelayTimeInSamples)
 {
     double readPosition = (double)mDelayIndex - inDelayTimeInSamples;
     
-    if(readPosition < 0.0){
+    if(readPosition < 0.f){
         readPosition = readPosition + (double)kMaxDelayBufferSize;
     }
     

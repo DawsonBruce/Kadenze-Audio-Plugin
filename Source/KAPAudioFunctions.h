@@ -31,7 +31,7 @@ inline double kap_cubic_interpolation( double y0, double y1, double y2, double y
     return ( (c3 * mu + c2 ) * mu + c1 ) * mu + c0;
 }
 
-inline float kap_delay_timing(float inUnmappedValue)
+inline float kap_time_signature(float inUnmappedValue)
 {
     if(inUnmappedValue<1.0f/18.0f)       return 1.0f/24.0f;//1/64T
     else if(inUnmappedValue<2.0f/18.0f)  return 1.0f/16.0f; //1/64

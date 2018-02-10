@@ -40,6 +40,7 @@ private:
     double getInterpolatedSample(float inDelayTimeInSamples);
     
     float mTimeSmoothed;
+    float mGainSmoothed;
     
     double mSampleRate;
     double mBuffer[kMaxDelayBufferSize];
