@@ -14,6 +14,7 @@
 
 #define kMaxDelayBufferSize 96000
 
+
 class KAPDelay
 {
 public:
@@ -29,14 +30,14 @@ public:
     
 private:
     
-    double getReadPosition(float inDelayTime);
+    /** internal */
+    double getInterpolatedSample(float inDelayTimeInSamples);
     
-    double getInterpolatedSample(double readPosition);
+    float mTimeSmoothed;
+    float mFeedbackSmoothed;
     
     double mSampleRate;
-    
     double mBuffer[kMaxDelayBufferSize];
-    
     double mFeedbackSample;
     
     int mDelayIndex;

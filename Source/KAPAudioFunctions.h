@@ -10,6 +10,10 @@
 
 #pragma once
 
+#define kKAPParamSmoothCoeff_Generic 0.04
+#define kKAPParamSmoothCoeff_Fine 0.002
+
+
 /** cubic hermite interpolation function
  
  @param         y0              interpolation point minus one.
