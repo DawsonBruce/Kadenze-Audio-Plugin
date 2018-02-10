@@ -16,7 +16,6 @@
 
 KAPDelay::KAPDelay()
 :   mTimeSmoothed(0),
-    mFeedbackSmoothed(0),
     mFeedbackSample(0),
     mDelayIndex(0)
 {
@@ -37,25 +36,28 @@ void KAPDelay::reset()
     memset(mBuffer, 0, sizeof(double)*kMaxDelayBufferSize);
 }
 
-void KAPDelay::process(float* inAudio, float inTime, float inFeedback,
-                       float* outAudio, int inNumSamplesToRender)
+void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inWetDry,
+                       float inOutputGain, float* outAudio, int inNumSamplesToRender)
 {
+    const float wet = inWetDry;
+    const float dry = 1.f - wet;
     
-    mFeedbackSmoothed = mFeedbackSmoothed - kKAPParamSmoothCoeff_Generic*(mFeedbackSmoothed-inFeedback);
-    
+    const float time = kap_delay_timing(inTime);
+        
     for(int i = 0; i < inNumSamplesToRender; i++){
         
-        mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-inTime);
+        mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-time);
+        
         const double delayTimeInSamples = (mSampleRate * mTimeSmoothed);
         const double sample = getInterpolatedSample(delayTimeInSamples);
         
-        mBuffer[mDelayIndex] = inAudio[i] + (mFeedbackSample * mFeedbackSmoothed);
+        mBuffer[mDelayIndex] = inAudio[i] + (mFeedbackSample * inFeedback);
         
         kapassert_isnan(sample);
         
         mFeedbackSample = sample;
         
-        outAudio[i] = sample;
+        outAudio[i] = inAudio[i]*dry + sample*wet;
         
         mDelayIndex = mDelayIndex + 1;
         

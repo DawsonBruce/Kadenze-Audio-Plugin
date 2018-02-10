@@ -33,7 +33,10 @@ KadenzeAudioPluginAudioProcessor::KadenzeAudioPluginAudioProcessor()
                   = new AudioParameterFloat ("time", "Time", 0.0f, 1.0f, 0.5f));
     
     addParameter (parameters[kParameter_DelayFeedback]
-                  = new AudioParameterFloat ("feedback", "Feedback", 0.0f, 1.5f, 0.5f));
+                  = new AudioParameterFloat ("feedback", "Feedback", 0.0f, 1.0f, 0.5f));
+
+    addParameter (parameters[kParameter_DelayWetDry]
+                  = new AudioParameterFloat ("wetdry",  "WetDry", 0.0f, 1.0f, 0.5f));
     
     addParameter (parameters[kParameter_DelayOutputGain]
                   = new AudioParameterFloat ("gain",  "Gain", 0.0f, 1.0f, 0.5f));
@@ -174,10 +177,10 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
         mDelay[channel]->process(channelData,
                         getParameter(kParameter_DelayTime),
                         getParameter(kParameter_DelayFeedback),
+                        getParameter(kParameter_DelayWetDry),
+                        getParameter(kParameter_DelayOutputGain),
                         channelData,
                         buffer.getNumSamples());
-
-        // ..do something to the data...
     }
     
 }

@@ -12,7 +12,7 @@
 
 #include "JuceHeader.h"
 
-#define kMaxDelayBufferSize 96000
+#define kMaxDelayBufferSize 192000
 
 
 class KAPDelay
@@ -26,7 +26,13 @@ public:
     
     void reset();
     
-    void process(float* inAudio, float inTime, float inFeedback, float* outAudio, int inNumSamplesToRender);
+    void process(float* inAudio,
+                 float inTime,
+                 float inFeedback,
+                 float inWetDry,
+                 float inOutputGain,
+                 float* outAudio,
+                 int inNumSamplesToRender);
     
 private:
     
@@ -34,7 +40,6 @@ private:
     double getInterpolatedSample(float inDelayTimeInSamples);
     
     float mTimeSmoothed;
-    float mFeedbackSmoothed;
     
     double mSampleRate;
     double mBuffer[kMaxDelayBufferSize];

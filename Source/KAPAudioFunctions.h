@@ -30,3 +30,25 @@ inline double kap_cubic_interpolation( double y0, double y1, double y2, double y
     double c3 = 0.5 * ( y3 - y0 ) + 1.5 * ( y1 - y2 );
     return ( (c3 * mu + c2 ) * mu + c1 ) * mu + c0;
 }
+
+inline float kap_delay_timing(float inUnmappedValue)
+{
+    if(inUnmappedValue<1.0f/18.0f)       return 1.0f/24.0f;//1/64T
+    else if(inUnmappedValue<2.0f/18.0f)  return 1.0f/16.0f; //1/64
+    else if(inUnmappedValue<3.0f/18.0f)  return 1.0f/12.0f; //1/32T
+    else if(inUnmappedValue<4.0f/18.0f)  return 1.0f/16.0f+1.0f/16.0f*0.5f; //1/64D
+    else if(inUnmappedValue<5.0f/18.0f)  return 1.0f/8.0f; //1/32
+    else if(inUnmappedValue<6.0f/18.0f)  return 1.0f/6.0f; //1/16T
+    else if(inUnmappedValue<7.0f/18.0f)  return 1.0f/8.0+1.0f/8.0*0.5f; //1/32D
+    else if(inUnmappedValue<8.0f/18.0f)  return 1.0f/4.0f; //1/16
+    else if(inUnmappedValue<9.0f/18.0f)  return 1.0f/3.0f; //1/8T
+    else if(inUnmappedValue<10.0f/18.0f) return 1.0f/4.0f+1.0f/4.0f*0.5f; //1/16D
+    else if(inUnmappedValue<11.0f/18.0f) return 1.0f/2.0f; //1/8
+    else if(inUnmappedValue<12.0f/18.0f) return 2.0f/3.0f; //1/4T
+    else if(inUnmappedValue<13.0f/18.0f) return 1.0f/2.0f+1.0f/2.0f*0.5f; //1/8D
+    else if(inUnmappedValue<14.0f/18.0f) return 1.0f/1.0f; //1/4
+    else if(inUnmappedValue<15.0f/18.0f) return 4.0f/3.0f; //1/2T
+    else if(inUnmappedValue<16.0f/18.0f) return 1.0f/1.0f+1.0f/1.0f*0.5f; //1/4D
+    else if(inUnmappedValue<17.0f/18.0f) return 2.0f/1.0f; //1/2
+    else return 2.0f/1.0f+2.0f/1.0f*0.5f; //1/2D
+}

@@ -13,6 +13,7 @@
 enum {
     kParameter_DelayTime = 0,
     kParameter_DelayFeedback,
+    kParameter_DelayWetDry,
     kParameter_DelayOutputGain,
     kParameter_ModulationRate,
     kParameter_ModulationDepth,
