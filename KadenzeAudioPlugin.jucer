@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="pf92i2" name="KadenzeAudioPlugin" displaySplashScreen="1"
+              reportAppUsage="1" splashScreenColour="Dark" projectType="audioplug"
+              version="1.0.0" bundleIdentifier="com.yourcompany.KadenzeAudioPlugin"
+              includeBinaryInAppConfig="1" cppLanguageStandard="11" buildVST="1"
+              buildVST3="0" buildAU="1" buildAUv3="0" buildRTAS="0" buildAAX="0"
+              buildStandalone="1" enableIAA="0" pluginName="KadenzeAudioPlugin"
+              pluginDesc="KadenzeAudioPlugin" pluginManufacturer="yourcompany"
+              pluginManufacturerCode="Manu" pluginCode="Pf92" pluginChannelConfigs=""
+              pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
+              pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0" pluginAUExportPrefix="KadenzeAudioPluginAU"
+              pluginRTASCategory="" aaxIdentifier="com.yourcompany.KadenzeAudioPlugin"
+              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="5.1.2">
+  <MAINGROUP id="rSokST" name="KadenzeAudioPlugin">
+    <GROUP id="{4CE099FD-EE82-3310-B882-96F9D7581899}" name="Helpers">
+      <FILE id="uvoQdL" name="KAPHelperFunctions.h" compile="0" resource="0"
+            file="Source/KAPHelperFunctions.h"/>
+      <FILE id="H27bcO" name="KAPAudioFunctions.h" compile="0" resource="0"
+            file="Source/KAPAudioFunctions.h"/>
+      <FILE id="MAyX5O" name="KAPUsedParameters.h" compile="0" resource="0"
+            file="Source/KAPUsedParameters.h"/>
+    </GROUP>
+    <GROUP id="{A2EAFC84-037E-E1B3-36F9-C9D2360B82F9}" name="Parameters">
+      <FILE id="Wsgiqe" name="KAPParameterControl.cpp" compile="1" resource="0"
+            file="Source/KAPParameterControl.cpp"/>
+      <FILE id="ZWqjJh" name="KAPParameterControl.h" compile="0" resource="0"
+            file="Source/KAPParameterControl.h"/>
+      <FILE id="pzgtQu" name="KAPParameterSlider.cpp" compile="1" resource="0"
+            file="Source/KAPParameterSlider.cpp"/>
+      <FILE id="psI51n" name="KAPParameterSlider.h" compile="0" resource="0"
+            file="Source/KAPParameterSlider.h"/>
+    </GROUP>
+    <GROUP id="{A563BB59-F8AD-15F6-BF4C-D2AFDE709A88}" name="DSP">
+      <FILE id="OXMVFu" name="KAPDelay.cpp" compile="1" resource="0" file="Source/KAPDelay.cpp"/>
+      <FILE id="ERZ8Ss" name="KAPDelay.h" compile="0" resource="0" file="Source/KAPDelay.h"/>
+    </GROUP>
+    <GROUP id="{8D3718CF-3F96-4190-D392-AAC998EE6CC3}" name="Source">
+      <FILE id="GkfQOX" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="Exdcdl" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="Bh6QIE" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="MUZiV7" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="KadenzeAudioPlugin"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="KadenzeAudioPlugin"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_video" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../Development/juce-grapefruit-osx/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled"/>
+</JUCERPROJECT>
