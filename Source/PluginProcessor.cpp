@@ -28,24 +28,8 @@ KadenzeAudioPluginAudioProcessor::KadenzeAudioPluginAudioProcessor()
     /** initialize our dsp */
     initializeDSP();
     
-    /** add our parameters to processor */
-    addParameter (parameters[kParameter_DelayTime]
-                  = new AudioParameterFloat ("time", "Time", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_DelayFeedback]
-                  = new AudioParameterFloat ("feedback", "Feedback", 0.0f, 1.0f, 0.5f));
-
-    addParameter (parameters[kParameter_DelayWetDry]
-                  = new AudioParameterFloat ("wetdry",  "WetDry", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_DelayOutputGain]
-                  = new AudioParameterFloat ("gain",  "Gain", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_ModulationRate]
-                  = new AudioParameterFloat ("rate", "Rate", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_ModulationDepth]
-                  = new AudioParameterFloat ("depth",  "Depth", 0.0f, 1.0f, 0.5f));
+    /** initialize our parameters */
+    initializeParameters();
 }
 
 KadenzeAudioPluginAudioProcessor::~KadenzeAudioPluginAudioProcessor()
@@ -202,12 +186,51 @@ void KadenzeAudioPluginAudioProcessor::getStateInformation (MemoryBlock& destDat
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    DBG("KadenzeAudioPluginAudioProcessor::getStateInformation");
+    
+    XmlElement preset(("KAP_StateInfo"));
+    XmlElement* presetBody = new XmlElement("KAP_Preset");
+    
+    const int numParameters = getNumParameters();
+    
+    for(int i = 0; i < numParameters; i ++){
+        presetBody->setAttribute(getParameterName(i), getParameter(i));
+    }
+    
+    preset.addChildElement(presetBody);
+    copyXmlToBinary (preset, destData);
 }
 
 void KadenzeAudioPluginAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+    DBG("KadenzeAudioPluginAudioProcessor::setStateInformation");
+    
+    XmlElement* xmlState = getXmlFromBinary(data, sizeInBytes);
+    
+    if(xmlState != nullptr){
+        
+        forEachXmlChildElement(*xmlState, subchild){
+            
+            /** iterate our XML for attribute name and value */
+            for(int i = 0; i < subchild->getNumAttributes(); i ++){
+                String name = subchild->getAttributeName(i);
+                float value = subchild->getDoubleAttribute(name);
+                
+                /** iterate our XML for parameter list for name. */
+                for(int j = 0; j < getNumParameters(); j++){
+                    if(getParameterName(j) == name){
+                        setParameter(j, value);
+                        break;
+                    }
+                }
+            }
+        }
+    } else {
+        
+        DBG("KadenzeAudioPluginAudioProcessor::setStateInformation XML NULL");
+    }
 }
 
 void KadenzeAudioPluginAudioProcessor::setParameter (int parameterIndex, float newValue)
@@ -222,6 +245,28 @@ void KadenzeAudioPluginAudioProcessor::initializeDSP()
     for(int i = 0; i < getTotalNumInputChannels(); i++){
         mDelay[i] = new KAPDelay();
     }
+}
+
+void KadenzeAudioPluginAudioProcessor::initializeParameters()
+{
+    /** add our parameters to processor */
+    addParameter (parameters[kParameter_DelayTime]
+                  = new AudioParameterFloat ("time", "Time", 0.0f, 1.0f, 0.5f));
+    
+    addParameter (parameters[kParameter_DelayFeedback]
+                  = new AudioParameterFloat ("feedback", "Feedback", 0.0f, 1.0f, 0.5f));
+    
+    addParameter (parameters[kParameter_DelayWetDry]
+                  = new AudioParameterFloat ("wetdry",  "WetDry", 0.0f, 1.0f, 0.5f));
+    
+    addParameter (parameters[kParameter_DelayOutputGain]
+                  = new AudioParameterFloat ("gain",  "Gain", 0.0f, 1.0f, 0.5f));
+    
+    addParameter (parameters[kParameter_ModulationRate]
+                  = new AudioParameterFloat ("rate", "Rate", 0.0f, 1.0f, 0.5f));
+    
+    addParameter (parameters[kParameter_ModulationDepth]
+                  = new AudioParameterFloat ("depth",  "Depth", 0.0f, 1.0f, 0.5f));
 }
 
 //==============================================================================

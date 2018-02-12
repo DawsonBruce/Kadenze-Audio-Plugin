@@ -68,6 +68,8 @@ private:
     
     /** internal */
     void initializeDSP();
+    /** internal */
+    void initializeParameters();
     
     ScopedPointer<KAPDelay> mDelay [kMaxNumDelays];
     
