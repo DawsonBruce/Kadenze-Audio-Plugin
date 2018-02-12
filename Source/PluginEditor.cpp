@@ -24,7 +24,7 @@ KadenzeAudioPluginAudioProcessorEditor::KadenzeAudioPluginAudioProcessorEditor (
     int y = 10;
     const int size = 64;
     
-    for(int i = 0; i < kParameter_ModulationRate; i++){
+    for(int i = 0; i < kParameter_TotalNumParameters; i++){
         mParameterSlider[i] = new KAPParameterSlider(processor.parameters[i]);
         mParameterSlider[i]->setBounds(x, y, size, size);
         addAndMakeVisible(mParameterSlider[i]);

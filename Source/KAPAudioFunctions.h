@@ -10,9 +10,20 @@
 
 #pragma once
 
+/** KAP max buffer size. */
+#define kMaxChannelBufferSize 192000
+
+/** KAP max num channels. */
+#define kMaxNumChannels 8
+
+/** KAP smoothing parameters. */
 #define kKAPParamSmoothCoeff_Generic 0.04
 #define kKAPParamSmoothCoeff_Fine 0.002
 
+/** PI Constants */
+static const double kPIHalf	= 1.5707963267948966192313216916397514420985846996;
+static const double kPI = 3.1415926535897932384626433832795028841968;
+static const double kPI2 = 6.2831853071795864769252867665590057683943;
 
 /** cubic hermite interpolation function
  

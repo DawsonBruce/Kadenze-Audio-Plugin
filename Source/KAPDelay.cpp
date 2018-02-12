@@ -33,11 +33,11 @@ void KAPDelay::setSampleRate(double inSampleRate)
 
 void KAPDelay::reset()
 {
-    memset(mBuffer, 0, sizeof(double)*kMaxDelayBufferSize);
+    memset(mBuffer, 0, sizeof(double)*kMaxChannelBufferSize);
 }
 
 void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inWetDry,
-                       float inOutputGain, float* outAudio, int inNumSamplesToRender)
+                       float inOutputGain, float* inModulationBuffer, float* outAudio, int inNumSamplesToRender)
 {
     const float time = kap_time_signature(inTime);
     const float wet = inWetDry;
@@ -52,7 +52,9 @@ void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inW
         
     for(int i = 0; i < inNumSamplesToRender; i++){
         
-        mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-time);
+        const double delayTimeModulation = time + (0.003 + 0.002 * inModulationBuffer[i]);
+
+        mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-delayTimeModulation);
         
         const double delayTimeInSamples = (mSampleRate * mTimeSmoothed);
         const double sample = getInterpolatedSample(delayTimeInSamples);
@@ -67,8 +69,8 @@ void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inW
         
         mDelayIndex = mDelayIndex + 1;
         
-        if(mDelayIndex >= kMaxDelayBufferSize){
-            mDelayIndex = mDelayIndex - kMaxDelayBufferSize;
+        if(mDelayIndex >= kMaxChannelBufferSize){
+            mDelayIndex = mDelayIndex - kMaxChannelBufferSize;
         }
     }
 }
@@ -79,27 +81,27 @@ double KAPDelay::getInterpolatedSample(float inDelayTimeInSamples)
     double readPosition = (double)mDelayIndex - inDelayTimeInSamples;
     
     if(readPosition < 0.f){
-        readPosition = readPosition + (double)kMaxDelayBufferSize;
+        readPosition = readPosition + (double)kMaxChannelBufferSize;
     }
     
     int index_y0 = (int)readPosition - 1;
     if(index_y0 < 0){
-        index_y0 = index_y0 + kMaxDelayBufferSize;
+        index_y0 = index_y0 + kMaxChannelBufferSize;
     }
     
     int index_y1 = readPosition;
-    if(index_y1 >= kMaxDelayBufferSize){
-        index_y1 = index_y1 - kMaxDelayBufferSize;
+    if(index_y1 >= kMaxChannelBufferSize){
+        index_y1 = index_y1 - kMaxChannelBufferSize;
     }
     
     int index_y2 = index_y1 + 1;
-    if(index_y2 >= kMaxDelayBufferSize){
-        index_y2 = index_y2 - kMaxDelayBufferSize;
+    if(index_y2 >= kMaxChannelBufferSize){
+        index_y2 = index_y2 - kMaxChannelBufferSize;
     }
     
     int index_y3 = index_y2 + 1;
-    if(index_y3 >= kMaxDelayBufferSize){
-        index_y3 = index_y3 - kMaxDelayBufferSize;
+    if(index_y3 >= kMaxChannelBufferSize){
+        index_y3 = index_y3 - kMaxChannelBufferSize;
     }
     
     const float sample_y0 = mBuffer[index_y0];

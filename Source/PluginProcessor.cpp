@@ -105,6 +105,7 @@ void KadenzeAudioPluginAudioProcessor::prepareToPlay (double sampleRate, int sam
     // initialisation that you need..
     for(int i = 0; i < getTotalNumInputChannels(); i++){
         mDelay[i]->setSampleRate(sampleRate);
+        mLfo[i]->setSampleRate(sampleRate);
     }
 }
 
@@ -158,11 +159,22 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         float* channelData = buffer.getWritePointer (channel);
+        
+        float lfoBuffer [buffer.getNumSamples()];
+
+        float rate = channel==0 ? 0: getParameter(kParameter_ModulationRate);
+
+        mLfo[channel]->process(rate,
+                               getParameter(kParameter_ModulationDepth),
+                               lfoBuffer,
+                               buffer.getNumSamples());
+        
         mDelay[channel]->process(channelData,
                         getParameter(kParameter_DelayTime),
                         getParameter(kParameter_DelayFeedback),
                         getParameter(kParameter_DelayWetDry),
                         getParameter(kParameter_DelayOutputGain),
+                        lfoBuffer,
                         channelData,
                         buffer.getNumSamples());
     }
@@ -243,6 +255,7 @@ void KadenzeAudioPluginAudioProcessor::setParameter (int parameterIndex, float n
 void KadenzeAudioPluginAudioProcessor::initializeDSP()
 {
     for(int i = 0; i < getTotalNumInputChannels(); i++){
+        mLfo[i] = new KAPLfo();
         mDelay[i] = new KAPDelay();
     }
 }

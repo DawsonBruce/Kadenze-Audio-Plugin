@@ -22,10 +22,6 @@
             file="Source/KAPUsedParameters.h"/>
     </GROUP>
     <GROUP id="{A2EAFC84-037E-E1B3-36F9-C9D2360B82F9}" name="Parameters">
-      <FILE id="Wsgiqe" name="KAPParameterControl.cpp" compile="1" resource="0"
-            file="Source/KAPParameterControl.cpp"/>
-      <FILE id="ZWqjJh" name="KAPParameterControl.h" compile="0" resource="0"
-            file="Source/KAPParameterControl.h"/>
       <FILE id="pzgtQu" name="KAPParameterSlider.cpp" compile="1" resource="0"
             file="Source/KAPParameterSlider.cpp"/>
       <FILE id="psI51n" name="KAPParameterSlider.h" compile="0" resource="0"
@@ -34,6 +30,8 @@
     <GROUP id="{A563BB59-F8AD-15F6-BF4C-D2AFDE709A88}" name="DSP">
       <FILE id="OXMVFu" name="KAPDelay.cpp" compile="1" resource="0" file="Source/KAPDelay.cpp"/>
       <FILE id="ERZ8Ss" name="KAPDelay.h" compile="0" resource="0" file="Source/KAPDelay.h"/>
+      <FILE id="UhCdUO" name="KAPLfo.cpp" compile="1" resource="0" file="Source/KAPLfo.cpp"/>
+      <FILE id="hEFyiA" name="KAPLfo.h" compile="0" resource="0" file="Source/KAPLfo.h"/>
     </GROUP>
     <GROUP id="{8D3718CF-3F96-4190-D392-AAC998EE6CC3}" name="Source">
       <FILE id="GkfQOX" name="PluginProcessor.cpp" compile="1" resource="0"

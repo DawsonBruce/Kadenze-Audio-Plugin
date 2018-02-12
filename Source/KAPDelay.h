@@ -11,9 +11,7 @@
 #pragma once
 
 #include "JuceHeader.h"
-
-#define kMaxDelayBufferSize 192000
-
+#include "KAPAudioFunctions.h"
 
 class KAPDelay
 {
@@ -31,6 +29,7 @@ public:
                  float inFeedback,
                  float inWetDry,
                  float inOutputGain,
+                 float* inModulationBuffer,
                  float* outAudio,
                  int inNumSamplesToRender);
     
@@ -43,7 +42,7 @@ private:
     float mGainSmoothed;
     
     double mSampleRate;
-    double mBuffer[kMaxDelayBufferSize];
+    double mBuffer[kMaxChannelBufferSize];
     double mFeedbackSample;
     
     int mDelayIndex;
