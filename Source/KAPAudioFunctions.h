@@ -31,6 +31,11 @@ inline double kap_cubic_interpolation( double y0, double y1, double y2, double y
     return ( (c3 * mu + c2 ) * mu + c1 ) * mu + c0;
 }
 
+/** function for returning a time signature based on an unmapped 0.f - 1.f value.
+ 
+@param      inUnmappedValue     the unmapped 0.f - 1.f value we'd like to return a time signature for.
+ */
+
 inline float kap_time_signature(float inUnmappedValue)
 {
     if(inUnmappedValue<1.0f/18.0f)       return 1.0f/24.0f;//1/64T
