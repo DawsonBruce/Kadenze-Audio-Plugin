@@ -159,24 +159,37 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         float* channelData = buffer.getWritePointer (channel);
+        const int numSamplesToRender = buffer.getNumSamples();
         
-        float lfoBuffer [buffer.getNumSamples()];
-
+        /** process input gain */
+        mInputGain[channel]->process(channelData,
+                                     getParameter(kParameter_InputGain),
+                                     channelData,
+                                     numSamplesToRender);
+        
+        /** process lfo */
+        float lfoBuffer [numSamplesToRender];
         float rate = channel==0 ? 0: getParameter(kParameter_ModulationRate);
 
         mLfo[channel]->process(rate,
                                getParameter(kParameter_ModulationDepth),
                                lfoBuffer,
-                               buffer.getNumSamples());
+                               numSamplesToRender);
         
+        /** process delay. */
         mDelay[channel]->process(channelData,
                         getParameter(kParameter_DelayTime),
                         getParameter(kParameter_DelayFeedback),
                         getParameter(kParameter_DelayWetDry),
-                        getParameter(kParameter_DelayOutputGain),
                         lfoBuffer,
                         channelData,
-                        buffer.getNumSamples());
+                        numSamplesToRender);
+        
+        /** process output gain */
+        mOutputGain[channel]->process(channelData,
+                                     getParameter(kParameter_OutputGain),
+                                     channelData,
+                                     numSamplesToRender);
     }
     
 }
@@ -257,12 +270,23 @@ void KadenzeAudioPluginAudioProcessor::initializeDSP()
     for(int i = 0; i < getTotalNumInputChannels(); i++){
         mLfo[i] = new KAPLfo();
         mDelay[i] = new KAPDelay();
+        mInputGain[i] = new KAPGain();
+        mOutputGain[i] = new KAPGain();
     }
 }
 
 void KadenzeAudioPluginAudioProcessor::initializeParameters()
 {
     /** add our parameters to processor */
+    addParameter (parameters[kParameter_InputGain]
+                  = new AudioParameterFloat ("inputgain",  "InputGain", 0.0f, 1.0f, 0.5f));
+    
+    addParameter (parameters[kParameter_ModulationRate]
+                  = new AudioParameterFloat ("rate", "Rate", 0.0f, 1.0f, 0.5f));
+    
+    addParameter (parameters[kParameter_ModulationDepth]
+                  = new AudioParameterFloat ("depth",  "Depth", 0.0f, 1.0f, 0.5f));
+    
     addParameter (parameters[kParameter_DelayTime]
                   = new AudioParameterFloat ("time", "Time", 0.0f, 1.0f, 0.5f));
     
@@ -272,14 +296,8 @@ void KadenzeAudioPluginAudioProcessor::initializeParameters()
     addParameter (parameters[kParameter_DelayWetDry]
                   = new AudioParameterFloat ("wetdry",  "WetDry", 0.0f, 1.0f, 0.5f));
     
-    addParameter (parameters[kParameter_DelayOutputGain]
-                  = new AudioParameterFloat ("gain",  "Gain", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_ModulationRate]
-                  = new AudioParameterFloat ("rate", "Rate", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_ModulationDepth]
-                  = new AudioParameterFloat ("depth",  "Depth", 0.0f, 1.0f, 0.5f));
+    addParameter (parameters[kParameter_OutputGain]
+                  = new AudioParameterFloat ("outputgain",  "OutputGain", 0.0f, 1.0f, 0.5f));
 }
 
 //==============================================================================

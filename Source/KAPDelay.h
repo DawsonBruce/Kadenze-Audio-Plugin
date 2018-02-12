@@ -28,7 +28,6 @@ public:
                  float inTime,
                  float inFeedback,
                  float inWetDry,
-                 float inOutputGain,
                  float* inModulationBuffer,
                  float* outAudio,
                  int inNumSamplesToRender);
@@ -39,7 +38,6 @@ private:
     double getInterpolatedSample(float inDelayTimeInSamples);
     
     float mTimeSmoothed;
-    float mGainSmoothed;
     
     double mSampleRate;
     double mBuffer[kMaxChannelBufferSize];

@@ -19,6 +19,7 @@
 /** KAP smoothing parameters. */
 #define kKAPParamSmoothCoeff_Generic 0.04
 #define kKAPParamSmoothCoeff_Fine 0.002
+#define kKAPMeterSmoothingCoeff 0.1
 
 /** PI Constants */
 static const double kPIHalf	= 1.5707963267948966192313216916397514420985846996;

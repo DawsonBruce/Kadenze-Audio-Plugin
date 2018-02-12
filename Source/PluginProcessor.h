@@ -13,8 +13,10 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "KAPUsedParameters.h"
 #include "KAPAudioFunctions.h"
+
 #include "KAPDelay.h"
 #include "KAPLfo.h"
+#include "KAPGain.h"
 
 //==============================================================================
 /**
@@ -73,6 +75,8 @@ private:
     
     ScopedPointer<KAPDelay> mDelay [kMaxNumChannels];
     ScopedPointer<KAPLfo> mLfo [kMaxNumChannels];
+    ScopedPointer<KAPGain> mInputGain [kMaxNumChannels];
+    ScopedPointer<KAPGain> mOutputGain [kMaxNumChannels];
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KadenzeAudioPluginAudioProcessor)

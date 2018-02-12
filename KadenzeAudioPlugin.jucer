@@ -30,6 +30,8 @@
     <GROUP id="{A563BB59-F8AD-15F6-BF4C-D2AFDE709A88}" name="DSP">
       <FILE id="OXMVFu" name="KAPDelay.cpp" compile="1" resource="0" file="Source/KAPDelay.cpp"/>
       <FILE id="ERZ8Ss" name="KAPDelay.h" compile="0" resource="0" file="Source/KAPDelay.h"/>
+      <FILE id="FNoklT" name="KAPGain.cpp" compile="1" resource="0" file="Source/KAPGain.cpp"/>
+      <FILE id="E09pEl" name="KAPGain.h" compile="0" resource="0" file="Source/KAPGain.h"/>
       <FILE id="UhCdUO" name="KAPLfo.cpp" compile="1" resource="0" file="Source/KAPLfo.cpp"/>
       <FILE id="hEFyiA" name="KAPLfo.h" compile="0" resource="0" file="Source/KAPLfo.h"/>
     </GROUP>

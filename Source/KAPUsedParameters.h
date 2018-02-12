@@ -11,12 +11,16 @@
 #pragma once
 
 enum {
-    kParameter_DelayTime = 0,
-    kParameter_DelayFeedback,
-    kParameter_DelayWetDry,
-    kParameter_DelayOutputGain,
+    kParameter_InputGain = 0,
+    
     kParameter_ModulationRate,
     kParameter_ModulationDepth,
+    
+    kParameter_DelayTime,
+    kParameter_DelayFeedback,
+    kParameter_DelayWetDry,
+    
+    kParameter_OutputGain,
     
     kParameter_TotalNumParameters
 };
