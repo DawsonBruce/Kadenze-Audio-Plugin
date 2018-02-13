@@ -24,15 +24,8 @@ KAPPresetManager::KAPPresetManager(AudioProcessor* inProcessor)
         File(mPresetDirectory).createDirectory();
     }
     
-    /** iterate our preset directory and store preset files in array */
-    for (DirectoryIterator di (File(mPresetDirectory),
-                               false,
-                               "*"+(String)PRESET_FILE_EXTENTION,
-                               File::TypesOfFileToFind::findFiles); di.next();){
-        
-        const File presetFile =  di.getFile();        
-        mLocalPresets.add(presetFile);
-    }
+    /** store our presets internally to the preset manager. */
+    storeLocalPresets();
 }
 
 KAPPresetManager::~KAPPresetManager()
@@ -96,10 +89,9 @@ void KAPPresetManager::savePreset()
     DBG("SAVE!");
 }
 
-void KAPPresetManager::saveAsPreset()
+void KAPPresetManager::saveAsPreset(String inPresetName)
 {
-    String presetName = "Preset";    
-    File presetFile = File(mPresetDirectory + "/" + presetName + PRESET_FILE_EXTENTION);
+    File presetFile = File(mPresetDirectory + "/" + inPresetName + PRESET_FILE_EXTENTION);
     
     if(!presetFile.exists()){
         presetFile.create();
@@ -111,17 +103,33 @@ void KAPPresetManager::saveAsPreset()
     mProcessor->getStateInformation(destinationData);
     
     presetFile.appendData(destinationData.getData(), destinationData.getSize());
-    presetFile.revealToUser();
+    
+    storeLocalPresets();
+    sendChangeMessage();
 }
 
 void KAPPresetManager::loadPreset(int inPresetIndex)
 {
     File preset = mLocalPresets[inPresetIndex];
-    
     MemoryBlock presetBinary;
     
     if(preset.loadFileAsData(presetBinary)){
         mProcessor->setStateInformation(presetBinary.getData(), (int)presetBinary.getSize());
         sendChangeMessage();
+    }
+}
+
+void KAPPresetManager::storeLocalPresets()
+{
+    mLocalPresets.clear();
+    
+    /** iterate our preset directory and store preset files in array */
+    for (DirectoryIterator di (File(mPresetDirectory),
+                               false,
+                               "*"+(String)PRESET_FILE_EXTENTION,
+                               File::TypesOfFileToFind::findFiles); di.next();){
+        
+        const File presetFile =  di.getFile();
+        mLocalPresets.add(presetFile);
     }
 }

@@ -29,6 +29,8 @@ private:
     /** button::listener override */
     void buttonClicked(Button* b) override;
     
+    void changeListenerCallback (ChangeBroadcaster* source) override;
+    
     ScopedPointer<ComboBox> mPresetDisplay;
     
     ScopedPointer<TextButton> mNewPreset, mSavePreset, mSaveAsPreset;

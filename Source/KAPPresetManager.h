@@ -40,12 +40,15 @@ public:
     
     /** used for saving a NEW preset. 
         this'll store a new preset on the disk at a file location specified in the parameter manager. */
-    void saveAsPreset();
+    void saveAsPreset(String inPresetName = "Preset");
     
     /** used for loading presets based on index. */
     void loadPreset(int inPresetIndex);
     
 private:
+    
+    /** internal function for updating the preset managers internal list of associated presets. This can be called on initialization, or after a new preset has been added via preset manager. */
+    void storeLocalPresets();
     
     Array<File> mLocalPresets;
     
