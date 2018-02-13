@@ -40,11 +40,36 @@ KAPTopPanel::KAPTopPanel(KadenzeAudioPluginAudioProcessor* processor)
     mSaveAsPreset->setBounds(button_x, button_y, button_w, button_h);
     mSaveAsPreset->addListener(this);
     addAndMakeVisible(mSaveAsPreset);
+    
+    const int comboBox_w = 200;
+    const int comboBox_x = TOP_PANEL_WIDTH*0.5 - comboBox_w*0.5;
+    
+    mPresetDisplay = new ComboBox();
+    mPresetDisplay->setText("Untitled", dontSendNotification);
+    mPresetDisplay->setBounds(comboBox_x, button_y, comboBox_w, button_h);
+    mPresetDisplay->addListener(this);
+    addAndMakeVisible(mPresetDisplay);
+    
+    KAPPresetManager* presetManager = mProcessor->getPresetManager();
+    const int numPresets = presetManager->getNumberOfPresets();
+    
+    for(int i = 0; i < numPresets; i++){
+        mPresetDisplay->addItem(presetManager->getPresetName(i), (i+1));
+    }
 }
 
 KAPTopPanel::~KAPTopPanel()
 {
     
+}
+
+void KAPTopPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
+{
+    if(comboBoxThatHasChanged == mPresetDisplay){
+        
+        KAPPresetManager* presetManager = mProcessor->getPresetManager();
+        presetManager->loadPreset(mPresetDisplay->getSelectedItemIndex());
+    }
 }
 
 void KAPTopPanel::buttonClicked(Button* b)

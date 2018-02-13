@@ -26,6 +26,12 @@ public:
     
     void loadPresetForXml(XmlElement* inElement);
     
+    /** function used for returning number of locally stored presets. */
+    int getNumberOfPresets();
+    
+    /** function used for returning preset name based on index. */
+    String getPresetName(int inPresetIndex);
+    
     /** used for loading a 'new' preset -- essentially resets all parameters to their default values. */
     void createNewPreset();
     
@@ -36,7 +42,12 @@ public:
         this'll store a new preset on the disk at a file location specified in the parameter manager. */
     void saveAsPreset();
     
+    /** used for loading presets based on index. */
+    void loadPreset(int inPresetIndex);
+    
 private:
+    
+    Array<File> mLocalPresets;
     
     String mPresetDirectory;
     

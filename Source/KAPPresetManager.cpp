@@ -24,7 +24,15 @@ KAPPresetManager::KAPPresetManager(AudioProcessor* inProcessor)
         File(mPresetDirectory).createDirectory();
     }
     
-    
+    /** iterate our preset directory and store preset files in array */
+    for (DirectoryIterator di (File(mPresetDirectory),
+                               false,
+                               "*"+(String)PRESET_FILE_EXTENTION,
+                               File::TypesOfFileToFind::findFiles); di.next();){
+        
+        const File presetFile =  di.getFile();        
+        mLocalPresets.add(presetFile);
+    }
 }
 
 KAPPresetManager::~KAPPresetManager()
@@ -60,6 +68,15 @@ void KAPPresetManager::loadPresetForXml(XmlElement* inElement)
     }
 }
 
+int KAPPresetManager::getNumberOfPresets()
+{
+    return mLocalPresets.size();
+}
+
+String KAPPresetManager::getPresetName(int inPresetIndex)
+{
+    return mLocalPresets[inPresetIndex].getFileNameWithoutExtension();
+}
 
 void KAPPresetManager::createNewPreset()
 {
@@ -95,4 +112,16 @@ void KAPPresetManager::saveAsPreset()
     
     presetFile.appendData(destinationData.getData(), destinationData.getSize());
     presetFile.revealToUser();
+}
+
+void KAPPresetManager::loadPreset(int inPresetIndex)
+{
+    File preset = mLocalPresets[inPresetIndex];
+    
+    MemoryBlock presetBinary;
+    
+    if(preset.loadFileAsData(presetBinary)){
+        mProcessor->setStateInformation(presetBinary.getData(), (int)presetBinary.getSize());
+        sendChangeMessage();
+    }
 }
