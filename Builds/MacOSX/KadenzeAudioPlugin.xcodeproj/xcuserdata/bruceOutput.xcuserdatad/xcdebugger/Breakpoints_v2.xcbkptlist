@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/KAPLfo.cpp"
-            timestampString = "540162929.8413171"
+            filePath = "../../Source/KAPPresetManager.cpp"
+            timestampString = "540251450.007726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "KAPLfo::process(float inRate, float inDepth, float* outAudio, int inNumSamplesToRender)"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "KAPPresetManager::saveAsPreset()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/KAPDelay.cpp"
-            timestampString = "540167171.458376"
+            filePath = "../../Source/KAPPresetManager.cpp"
+            timestampString = "540251450.007726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inWetDry, float inType, float* inModulationBuffer, float* outAudio, int inNumSamplesToRender)"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "KAPPresetManager::saveAsPreset()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/KAPPresetManager.cpp"
+            timestampString = "540251450.007726"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "KAPPresetManager::KAPPresetManager(AudioProcessor* inProcessor)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/KAPPresetManager.cpp"
+            timestampString = "540251450.007726"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "KAPPresetManager::KAPPresetManager(AudioProcessor* inProcessor)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

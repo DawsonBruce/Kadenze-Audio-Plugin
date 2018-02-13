@@ -12,6 +12,8 @@
 
 #include "JuceHeader.h"
 
+#define PRESET_FILE_EXTENTION ".kpf"
+
 class KAPPresetManager
 :   public ChangeBroadcaster
 {
@@ -35,6 +37,10 @@ public:
     void saveAsPreset();
     
 private:
+    
+    String mPresetDirectory;
+    
+    XmlElement* mCurrentPresetXml;
     
     AudioProcessor* mProcessor;
 };

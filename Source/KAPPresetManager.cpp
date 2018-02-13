@@ -14,6 +14,16 @@
 KAPPresetManager::KAPPresetManager(AudioProcessor* inProcessor)
 :   mProcessor(inProcessor)
 {
+    const String pluginName = (String)mProcessor->getName();
+    
+    mPresetDirectory =
+    (File::getSpecialLocation(File::userDocumentsDirectory)).getFullPathName()+"/Kadenze/"+pluginName;
+    
+    /** create our preset directory if it doesn't exist */
+    if(!File(mPresetDirectory).exists()){
+        File(mPresetDirectory).createDirectory();
+    }
+    
     
 }
 
@@ -33,10 +43,12 @@ void KAPPresetManager::getXmlForPreset(XmlElement* inElement)
 
 void KAPPresetManager::loadPresetForXml(XmlElement* inElement)
 {
+    mCurrentPresetXml = inElement;
+    
     /** iterate our XML for attribute name and value */
-    for(int i = 0; i < inElement->getNumAttributes(); i ++){
-        String name = inElement->getAttributeName(i);
-        float value = inElement->getDoubleAttribute(name);
+    for(int i = 0; i < mCurrentPresetXml->getNumAttributes(); i ++){
+        String name = mCurrentPresetXml->getAttributeName(i);
+        float value = mCurrentPresetXml->getDoubleAttribute(name);
         
         /** iterate our parameter list for name. */
         for(int j = 0; j < mProcessor->getNumParameters(); j++){
@@ -69,5 +81,18 @@ void KAPPresetManager::savePreset()
 
 void KAPPresetManager::saveAsPreset()
 {
-    DBG("SAVE AS!");
+    String presetName = "Preset";    
+    File presetFile = File(mPresetDirectory + "/" + presetName + PRESET_FILE_EXTENTION);
+    
+    if(!presetFile.exists()){
+        presetFile.create();
+    } else {
+        presetFile.deleteFile();
+    }
+    
+    MemoryBlock destinationData;
+    mProcessor->getStateInformation(destinationData);
+    
+    presetFile.appendData(destinationData.getData(), destinationData.getSize());
+    presetFile.revealToUser();
 }

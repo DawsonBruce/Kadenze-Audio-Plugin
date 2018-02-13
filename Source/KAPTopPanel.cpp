@@ -59,6 +59,7 @@ void KAPTopPanel::buttonClicked(Button* b)
     }
     
     else if(b == mSaveAsPreset){
-        
+        KAPPresetManager* presetManager = mProcessor->getPresetManager();
+        presetManager->saveAsPreset();
     }
 }
