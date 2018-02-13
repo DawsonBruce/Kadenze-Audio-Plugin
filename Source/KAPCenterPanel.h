@@ -25,6 +25,9 @@ public:
     
 private:
     
+    /** internal */
+    void showPanel(int inPanelID);
+    
     /** grid type listener from menu bar */
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
     

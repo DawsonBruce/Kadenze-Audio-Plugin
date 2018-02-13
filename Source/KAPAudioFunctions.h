@@ -41,6 +41,8 @@ inline double kap_cubic_interpolation( double y0, double y1, double y2, double y
     double c2 = y0 - 2.5 * y1 + 2.0 * y2 - 0.5 * y3;
     double c3 = 0.5 * ( y3 - y0 ) + 1.5 * ( y1 - y2 );
     return ( (c3 * mu + c2 ) * mu + c1 ) * mu + c0;
+    
+    //CHECK OUT OTHER OPEN SOURCE INTERPOLATIONS THAT ARE EASILY ACCESSIBLE
 }
 
 /** function for returning a time signature based on an unmapped 0.f - 1.f value.

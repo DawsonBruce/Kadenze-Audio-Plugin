@@ -24,9 +24,10 @@ KAPCenterPanelMenuBar::KAPCenterPanelMenuBar(KadenzeAudioPluginAudioProcessor* p
         "chorus"
     };
     
+    const int openPanel = mProcessor->getLastOpenedPanel();
     mFxType = new KAPParameterComboBox(processor->parameters[kParameter_DelayType]);
     mFxType->addItemList(fxTypes, 1);
-    mFxType->setSelectedItemIndex(0, dontSendNotification);
+    mFxType->setSelectedItemIndex(openPanel, dontSendNotification);
     mFxType->setBounds(CENTER_PANEL_MENU_BAR_WIDTH - comboBox_w, 0, comboBox_w, comboBox_h);
     addAndMakeVisible(mFxType);
 }

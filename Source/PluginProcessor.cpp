@@ -25,6 +25,8 @@ KadenzeAudioPluginAudioProcessor::KadenzeAudioPluginAudioProcessor()
                        )
 #endif
 {
+    setLastOpenedPanel(0);
+    
     /** initialize our dsp */
     initializeDSP();
     
@@ -264,6 +266,16 @@ void KadenzeAudioPluginAudioProcessor::setParameter (int parameterIndex, float n
     DBG("parameter : " << parameterIndex);
     DBG("value : " << newValue);
     AudioProcessor::setParameter(parameterIndex, newValue);
+}
+
+void KadenzeAudioPluginAudioProcessor::setLastOpenedPanel(int inPanelID)
+{
+    mLastOpenedPanel=inPanelID;
+}
+
+int KadenzeAudioPluginAudioProcessor::getLastOpenedPanel()
+{
+    return mLastOpenedPanel;
 }
 
 void KadenzeAudioPluginAudioProcessor::initializeDSP()

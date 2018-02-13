@@ -10,6 +10,11 @@
 
 #pragma once
 
+enum KAPPanelIDs {
+    kKAPPanelIDs_FxDelay = 0,
+    kKAPPanelIDs_FxChorus
+};
+
 #define MAIN_PANEL_WIDTH                750
 #define MAIN_PANEL_HEIGHT               300
 

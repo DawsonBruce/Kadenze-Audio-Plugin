@@ -62,6 +62,10 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     void setParameter (int parameterIndex, float newValue) override;
+    
+    void setLastOpenedPanel(int inPanelID);
+    
+    int getLastOpenedPanel();
 
     // Our parameters
     AudioParameterFloat* parameters[kParameter_TotalNumParameters];
@@ -72,6 +76,8 @@ private:
     void initializeDSP();
     /** internal */
     void initializeParameters();
+    
+    int mLastOpenedPanel;
     
     ScopedPointer<KAPDelay> mDelay [kMaxNumChannels];
     ScopedPointer<KAPLfo> mLfo [kMaxNumChannels];
