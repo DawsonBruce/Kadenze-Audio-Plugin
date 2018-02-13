@@ -19,5 +19,9 @@ public:
     KAPCenterPanelMenuBar(KadenzeAudioPluginAudioProcessor* processor);
     ~KAPCenterPanelMenuBar();
     
+    void addFxTypeComboBoxListener(ComboBox::Listener* inListener);
+    
 private:
+    
+    ScopedPointer<ComboBox> mFxType;
 };
