@@ -15,7 +15,8 @@
 #include "KAPParameterComboBox.h"
 
 class KAPCenterPanelMenuBar
-:   public KAPPanelBase
+:   public KAPPanelBase,
+    public Button::Listener
 {
 public:
     KAPCenterPanelMenuBar(KadenzeAudioPluginAudioProcessor* processor);
@@ -24,6 +25,11 @@ public:
     void addFxTypeComboBoxListener(ComboBox::Listener* inListener);
     
 private:
+    
+    /** button::listener override */
+    void buttonClicked(Button* b) override;
+    
+    ScopedPointer<TextButton> mNewPreset, mSavePreset, mSaveAsPreset;
     
     ScopedPointer<KAPParameterComboBox> mFxType;
 };

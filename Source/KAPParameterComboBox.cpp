@@ -13,7 +13,7 @@
 KAPParameterComboBox::KAPParameterComboBox(AudioProcessorParameter* p)
 :   mParameter(p)
 {
-    setSelectedItemIndex((int)mParameter->getValue(), dontSendNotification);
+    updateValue();
     addListener(this);
 }
 
@@ -25,4 +25,9 @@ KAPParameterComboBox::~KAPParameterComboBox()
 void KAPParameterComboBox::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 {
     mParameter->setValueNotifyingHost((float)ComboBox::getSelectedItemIndex());
+}
+
+void KAPParameterComboBox::updateValue()
+{
+    setSelectedItemIndex((int)mParameter->getValue(), dontSendNotification);
 }

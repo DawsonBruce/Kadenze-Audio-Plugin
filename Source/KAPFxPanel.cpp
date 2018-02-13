@@ -25,6 +25,14 @@ KAPFxPanel::~KAPFxPanel()
     mSliders.clear();
 }
 
+void KAPFxPanel::visibilityChanged()
+{
+    /** update slider positions when set visible */
+    for(int i = 0; i < mSliders.size(); i++){
+        mSliders[i]->updateValue();
+    }
+}
+
 void KAPFxPanel::paint(Graphics& g)
 {
     String label;

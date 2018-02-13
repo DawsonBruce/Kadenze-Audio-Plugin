@@ -18,6 +18,8 @@
 #include "KAPLfo.h"
 #include "KAPGain.h"
 
+#include "KAPPresetManager.h"
+
 //==============================================================================
 /**
 */
@@ -66,6 +68,8 @@ public:
     void setLastOpenedPanel(int inPanelID);
     
     int getLastOpenedPanel();
+    
+    KAPPresetManager* getPresetManager();
 
     // Our parameters
     AudioParameterFloat* parameters[kParameter_TotalNumParameters];
@@ -78,6 +82,8 @@ private:
     void initializeParameters();
     
     int mLastOpenedPanel;
+    
+    ScopedPointer<KAPPresetManager> mPresetManager;
     
     ScopedPointer<KAPDelay> mDelay [kMaxNumChannels];
     ScopedPointer<KAPLfo> mLfo [kMaxNumChannels];

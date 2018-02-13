@@ -32,6 +32,8 @@ KadenzeAudioPluginAudioProcessor::KadenzeAudioPluginAudioProcessor()
     
     /** initialize our parameters */
     initializeParameters();
+    
+    mPresetManager = new KAPPresetManager(this);
 }
 
 KadenzeAudioPluginAudioProcessor::~KadenzeAudioPluginAudioProcessor()
@@ -219,11 +221,7 @@ void KadenzeAudioPluginAudioProcessor::getStateInformation (MemoryBlock& destDat
     XmlElement preset(("KAP_StateInfo"));
     XmlElement* presetBody = new XmlElement("KAP_Preset");
     
-    const int numParameters = getNumParameters();
-    
-    for(int i = 0; i < numParameters; i ++){
-        presetBody->setAttribute(getParameterName(i), getParameter(i));
-    }
+    mPresetManager->getXmlForPreset(presetBody);
     
     preset.addChildElement(presetBody);
     copyXmlToBinary (preset, destData);
@@ -238,22 +236,8 @@ void KadenzeAudioPluginAudioProcessor::setStateInformation (const void* data, in
     XmlElement* xmlState = getXmlFromBinary(data, sizeInBytes);
     
     if(xmlState != nullptr){
-        
         forEachXmlChildElement(*xmlState, subchild){
-            
-            /** iterate our XML for attribute name and value */
-            for(int i = 0; i < subchild->getNumAttributes(); i ++){
-                String name = subchild->getAttributeName(i);
-                float value = subchild->getDoubleAttribute(name);
-                
-                /** iterate our XML for parameter list for name. */
-                for(int j = 0; j < getNumParameters(); j++){
-                    if(getParameterName(j) == name){
-                        setParameter(j, value);
-                        break;
-                    }
-                }
-            }
+            mPresetManager->loadPresetForXml(subchild);
         }
     } else {
         
@@ -276,6 +260,11 @@ void KadenzeAudioPluginAudioProcessor::setLastOpenedPanel(int inPanelID)
 int KadenzeAudioPluginAudioProcessor::getLastOpenedPanel()
 {
     return mLastOpenedPanel;
+}
+
+KAPPresetManager* KadenzeAudioPluginAudioProcessor::getPresetManager()
+{
+    return mPresetManager;
 }
 
 void KadenzeAudioPluginAudioProcessor::initializeDSP()

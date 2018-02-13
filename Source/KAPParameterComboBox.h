@@ -20,6 +20,10 @@ public:
     KAPParameterComboBox(AudioProcessorParameter* p);
     ~KAPParameterComboBox();
     
+    /** function for updating slider
+     position based on parameter value.
+     */
+    void updateValue();
     
 private:
     

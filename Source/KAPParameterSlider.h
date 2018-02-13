@@ -22,13 +22,17 @@ public:
     
     /** component override */
     void mouseDoubleClick (const MouseEvent&) override;
-    
     /** slider override */
     void valueChanged() override;
     /** slider override */
     void startedDragging() override;
     /** slider override */
     void stoppedDragging() override;
+    
+    /** function for updating slider 
+        position based on parameter value. 
+     */
+    void updateValue();
     
 private:
     

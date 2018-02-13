@@ -30,6 +30,14 @@ KAPCenterPanelMenuBar::KAPCenterPanelMenuBar(KadenzeAudioPluginAudioProcessor* p
     mFxType->setSelectedItemIndex(openPanel, dontSendNotification);
     mFxType->setBounds(CENTER_PANEL_MENU_BAR_WIDTH - comboBox_w, 0, comboBox_w, comboBox_h);
     addAndMakeVisible(mFxType);
+    
+//    mNewPreset, mSavePreset, mSaveAsPreset
+    
+    mNewPreset = new TextButton();
+    mNewPreset->setButtonText("NEW");
+    mNewPreset->setBounds(15, 5, 35, 25);
+    mNewPreset->addListener(this);
+    addAndMakeVisible(mNewPreset);
 }
 
 KAPCenterPanelMenuBar::~KAPCenterPanelMenuBar()
@@ -40,4 +48,12 @@ KAPCenterPanelMenuBar::~KAPCenterPanelMenuBar()
 void KAPCenterPanelMenuBar::addFxTypeComboBoxListener(ComboBox::Listener* inListener)
 {
     mFxType->addListener(inListener);
+}
+
+void KAPCenterPanelMenuBar::buttonClicked(Button* b)
+{
+    if(b == mNewPreset){
+        KAPPresetManager* presetManager = mProcessor->getPresetManager();
+        presetManager->createNewPreset();
+    }
 }
