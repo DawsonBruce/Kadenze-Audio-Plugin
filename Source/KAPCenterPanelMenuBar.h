@@ -12,6 +12,8 @@
 
 #include "KAPPanelBase.h"
 
+#include "KAPParameterComboBox.h"
+
 class KAPCenterPanelMenuBar
 :   public KAPPanelBase
 {
@@ -23,5 +25,5 @@ public:
     
 private:
     
-    ScopedPointer<ComboBox> mFxType;
+    ScopedPointer<KAPParameterComboBox> mFxType;
 };

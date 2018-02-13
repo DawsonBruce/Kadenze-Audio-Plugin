@@ -13,6 +13,11 @@
 #include "JuceHeader.h"
 #include "KAPAudioFunctions.h"
 
+enum KAPDelayType {
+    kKAPDelayType_Delay,
+    kKAPDelayType_Chorus
+};
+
 class KAPDelay
 {
 public:
@@ -28,6 +33,7 @@ public:
                  float inTime,
                  float inFeedback,
                  float inWetDry,
+                 float inType,
                  float* inModulationBuffer,
                  float* outAudio,
                  int inNumSamplesToRender);

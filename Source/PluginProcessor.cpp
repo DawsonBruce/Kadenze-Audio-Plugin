@@ -181,6 +181,7 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                         getParameter(kParameter_DelayTime),
                         getParameter(kParameter_DelayFeedback),
                         getParameter(kParameter_DelayWetDry),
+                        getParameter(kParameter_DelayType),
                         lfoBuffer,
                         channelData,
                         numSamplesToRender);
@@ -295,6 +296,9 @@ void KadenzeAudioPluginAudioProcessor::initializeParameters()
     
     addParameter (parameters[kParameter_DelayWetDry]
                   = new AudioParameterFloat ("wetdry",  "WetDry", 0.0f, 1.0f, 0.5f));
+    
+    addParameter (parameters[kParameter_DelayType]
+                  = new AudioParameterFloat ("type",  "Type", 0.0f, 1.0f, 0.0f));
     
     addParameter (parameters[kParameter_OutputGain]
                   = new AudioParameterFloat ("outputgain",  "OutputGain", 0.0f, 1.0f, 0.5f));
