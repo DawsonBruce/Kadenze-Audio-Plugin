@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/KAPLfo.cpp"
-            timestampString = "540162929.8413171"
+            filePath = "../../Source/KAPFxPanel.cpp"
+            timestampString = "540178389.580373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "KAPLfo::process(float inRate, float inDepth, float* outAudio, int inNumSamplesToRender)"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "KAPFxPanel::setFxPanelStyle(KAPFxPanelStyle inStyle)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/KAPDelay.cpp"
-            timestampString = "540167171.458376"
+            filePath = "../../Source/KAPFxPanel.cpp"
+            timestampString = "540178389.580373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inWetDry, float* inModulationBuffer, float* outAudio, int inNumSamplesToRender)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "KAPFxPanel::setFxPanelStyle(KAPFxPanelStyle inStyle)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/KAPFxPanel.cpp"
+            timestampString = "540178389.580373"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "KAPFxPanel::setFxPanelStyle(KAPFxPanelStyle inStyle)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/KAPFxPanel.cpp"
+            timestampString = "540178389.580373"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "KAPFxPanel::setFxPanelStyle(KAPFxPanelStyle inStyle)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
