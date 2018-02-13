@@ -13,12 +13,14 @@
 KAPPanelBase::KAPPanelBase(KadenzeAudioPluginAudioProcessor* processor)
 :mProcessor(processor)
 {
-    
+    KAPPresetManager* presetManager = mProcessor->getPresetManager();
+    presetManager->addChangeListener(this);
 }
 
 KAPPanelBase::~KAPPanelBase()
 {
-    
+    KAPPresetManager* presetManager = mProcessor->getPresetManager();
+    presetManager->removeChangeListener(this);
 }
 
 void KAPPanelBase::paint(Graphics& g)

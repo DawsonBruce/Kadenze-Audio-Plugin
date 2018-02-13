@@ -51,10 +51,23 @@ void KAPPresetManager::loadPresetForXml(XmlElement* inElement)
 
 void KAPPresetManager::createNewPreset()
 {
+    /** first, update connected parameters */
     const int numParameters = mProcessor->getNumParameters();
-    
     for(int i = 0; i < numParameters; i ++){
         mProcessor->setParameter(i,
                                  mProcessor->getParameterDefaultValue(i));
     }
+    
+    /** second, broadcast change message to update UI. */
+    sendChangeMessage();
+}
+
+void KAPPresetManager::savePreset()
+{
+    DBG("SAVE!");
+}
+
+void KAPPresetManager::saveAsPreset()
+{
+    DBG("SAVE AS!");
 }

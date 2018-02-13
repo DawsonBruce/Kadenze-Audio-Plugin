@@ -13,11 +13,18 @@
 #include "KAPPanelBase.h"
 
 class KAPTopPanel
-:   public KAPPanelBase
+:   public KAPPanelBase,
+    public Button::Listener
 {
 public:
     KAPTopPanel(KadenzeAudioPluginAudioProcessor* processor);
     ~KAPTopPanel();
     
 private:
+    
+    /** button::listener override */
+    void buttonClicked(Button* b) override;
+    
+    ScopedPointer<TextButton> mNewPreset, mSavePreset, mSaveAsPreset;
+    
 };

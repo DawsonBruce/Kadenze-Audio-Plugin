@@ -24,5 +24,7 @@ public:
     
 private:
     
+    void changeListenerCallback (ChangeBroadcaster* source) override;
+    
     ScopedPointer<KAPParameterSlider> mGain;
 };
