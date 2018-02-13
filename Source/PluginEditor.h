@@ -14,6 +14,8 @@
 #include "PluginProcessor.h"
 #include "KAPParameterSlider.h"
 
+#include "KAPMainPanel.h"
+
 //==============================================================================
 /**
 */
@@ -29,6 +31,7 @@ public:
 
 private:
     
+    ScopedPointer<KAPMainPanel> mMainPanel;
     
     ScopedPointer<KAPParameterSlider> mParameterSlider[kParameter_TotalNumParameters];
     ScopedPointer<Label> mLabel[kParameter_TotalNumParameters];
