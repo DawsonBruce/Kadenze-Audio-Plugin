@@ -28,6 +28,8 @@ private:
     /** internal */
     void showPanel(int inPanelID);
     
+    void changeListenerCallback (ChangeBroadcaster* source) override;
+    
     /** grid type listener from menu bar */
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
     

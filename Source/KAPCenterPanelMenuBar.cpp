@@ -41,3 +41,8 @@ void KAPCenterPanelMenuBar::addFxTypeComboBoxListener(ComboBox::Listener* inList
 {
     mFxType->addListener(inListener);
 }
+
+void KAPCenterPanelMenuBar::changeListenerCallback (ChangeBroadcaster* source)
+{
+    mFxType->updateValue();
+}

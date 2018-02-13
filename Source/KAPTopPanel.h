@@ -23,6 +23,9 @@ public:
     
 private:
     
+    /** internal function displays popup menu for 'save as' functionality */
+    void displaySaveAsPopup();
+    
     /** listener override */
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
     

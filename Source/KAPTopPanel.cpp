@@ -63,6 +63,27 @@ KAPTopPanel::~KAPTopPanel()
     
 }
 
+void KAPTopPanel::displaySaveAsPopup()
+{
+    KAPPresetManager* presetManager = mProcessor->getPresetManager();
+    
+    String currentPresetName = mPresetDisplay->getText();
+    if(presetManager->getIsCurrentPresetSaved()){
+        currentPresetName = currentPresetName + "_2";
+    }
+    
+    AlertWindow window ("Save As","Please Enter a name for you preset.", AlertWindow::NoIcon);
+    window.addTextEditor("presetName", currentPresetName, "preset name:");
+    window.addButton("Confirm", 1);
+    window.addButton("Cancel", 0);
+    
+    /** confirm has been clicked, and we exit modal loop*/
+    if(window.runModalLoop() != 0){
+        String presetName = window.getTextEditor("presetName")->getText();
+        presetManager->saveAsPreset(presetName);
+    }
+}
+
 void KAPTopPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 {
     if(comboBoxThatHasChanged == mPresetDisplay){
@@ -74,30 +95,25 @@ void KAPTopPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
 void KAPTopPanel::buttonClicked(Button* b)
 {
+    KAPPresetManager* presetManager = mProcessor->getPresetManager();
+    
     if(b == mNewPreset){
         
-        KAPPresetManager* presetManager = mProcessor->getPresetManager();
         presetManager->createNewPreset();
     }
     
     else if(b == mSavePreset){
-        
+     
+        if(presetManager->getIsCurrentPresetSaved()){
+            presetManager->savePreset();
+        } else {
+            displaySaveAsPopup();
+        }
     }
     
     else if(b == mSaveAsPreset){
         
-        String currentPresetName = mPresetDisplay->getText();
-        AlertWindow window ("Save As","Please Enter a name for you preset.", AlertWindow::NoIcon);
-        window.addTextEditor("presetName", currentPresetName, "preset name:");
-        window.addButton("Confirm", 1);
-        window.addButton("Cancel", 0);
-        
-        /** confirm has been clicked, and we exit modal loop*/
-        if(window.runModalLoop() != 0){
-            String presetName = window.getTextEditor("presetName")->getText();
-            KAPPresetManager* presetManager = mProcessor->getPresetManager();
-            presetManager->saveAsPreset(presetName);
-        }
+        displaySaveAsPopup();
     }
 }
 
@@ -113,5 +129,9 @@ void KAPTopPanel::changeListenerCallback (ChangeBroadcaster* source)
         mPresetDisplay->addItem(presetManager->getPresetName(i), (i+1));
     }
     
-    mPresetDisplay->setSelectedItemIndex(selectedItemIndex, dontSendNotification);
+    if(presetManager->getIsCurrentPresetSaved()){
+        mPresetDisplay->setSelectedItemIndex(selectedItemIndex, dontSendNotification);
+    } else {
+        mPresetDisplay->setText("Untitled", dontSendNotification);
+    }
 }

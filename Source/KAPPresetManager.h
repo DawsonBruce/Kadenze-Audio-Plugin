@@ -45,11 +45,17 @@ public:
     /** used for loading presets based on index. */
     void loadPreset(int inPresetIndex);
     
+    /** used for determining if the currently loaded preset is saved on disk. */
+    bool getIsCurrentPresetSaved();
+    
 private:
     
     /** internal function for updating the preset managers internal list of associated presets. This can be called on initialization, or after a new preset has been added via preset manager. */
     void storeLocalPresets();
     
+    bool mCurrentPresetIsSaved;
+    
+    File mCurrentlyLoadedPreset;
     Array<File> mLocalPresets;
     
     String mPresetDirectory;
