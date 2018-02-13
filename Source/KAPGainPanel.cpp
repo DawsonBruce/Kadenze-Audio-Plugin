@@ -21,3 +21,11 @@ KAPGainPanel::~KAPGainPanel()
 {
     
 }
+
+void KAPGainPanel::setParameterID(int inParameterID)
+{
+    const int size = 54;
+    mGain = new KAPParameterSlider(mProcessor->parameters[inParameterID]);
+    mGain->setBounds(getWidth()*0.5 - size*0.5, size*0.5, size, size);
+    addAndMakeVisible(mGain);
+}
