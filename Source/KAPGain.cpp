@@ -34,11 +34,12 @@ void KAPGain::process(float* inAudio,
         outAudio[i] = inAudio[i] * mGainSmoothed;
     }
     
-    float absOutput = fabs(inAudio[0] * inGain);
+    float absOutput = fabs(outAudio[0]);
     mOutputSmoothed = kKAPMeterSmoothingCoeff*(mOutputSmoothed - absOutput) + absOutput;
 }
 
 float KAPGain::getMeterLevel()
 {
-    return mOutputSmoothed;
+    float normalizedOutput = linearToNormalizedLog10(mOutputSmoothed);
+    return normalizedOutput;
 }

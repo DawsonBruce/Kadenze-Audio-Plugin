@@ -19,12 +19,21 @@
 /** KAP smoothing parameters. */
 #define kKAPParamSmoothCoeff_Generic 0.04
 #define kKAPParamSmoothCoeff_Fine 0.002
-#define kKAPMeterSmoothingCoeff 0.1
+#define kKAPMeterSmoothingCoeff 0.2
 
 /** PI Constants */
 static const double kPIHalf	= 1.5707963267948966192313216916397514420985846996;
 static const double kPI = 3.1415926535897932384626433832795028841968;
 static const double kPI2 = 6.2831853071795864769252867665590057683943;
+
+static inline float ratioTodB(float inVal){
+    return 20.0f*log10(inVal) ;
+}
+
+static inline float linearToNormalizedLog10(float inVal){
+    float inValdB = ratioTodB(inVal+0.00001f);
+    return (inValdB + 80.0f)*0.01234546483f;
+}
 
 /** cubic hermite interpolation function
  
