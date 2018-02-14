@@ -35,6 +35,21 @@ static inline float linearToNormalizedLog10(float inVal){
     return (inValdB + 80.0f)*0.01234546483f;
 }
 
+/** simple denormalization function. 
+    if our number is smaller than 1 times ten to the -15th power (ie. 0.000000000000001) 
+    then return 0.0 -- otherwise return original value. 
+ */
+inline float kap_denorm(float inValue){
+    
+    float absValue = fabs(inValue);
+    
+    if(absValue < 1e-15){
+        return 0.f;
+    } else {
+        return inValue;
+    }
+}
+
 /** cubic hermite interpolation function
  
  @param         y0              interpolation point minus one.

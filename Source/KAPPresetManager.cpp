@@ -83,9 +83,6 @@ void KAPPresetManager::createNewPreset()
     
     /** update our bool */
     mCurrentPresetIsSaved = false;
-    
-    /** second, broadcast change message to update UI. */
-    sendChangeMessage();
 }
 
 void KAPPresetManager::savePreset()
