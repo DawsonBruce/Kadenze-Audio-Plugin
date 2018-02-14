@@ -10,6 +10,7 @@
 
 #include "KAPGainPanel.h"
 
+
 KAPGainPanel::KAPGainPanel(KadenzeAudioPluginAudioProcessor* processor)
 :   KAPPanelBase(processor)
 {
@@ -19,6 +20,13 @@ KAPGainPanel::KAPGainPanel(KadenzeAudioPluginAudioProcessor* processor)
 
 KAPGainPanel::~KAPGainPanel()
 {
+}
+
+void KAPGainPanel::paint(Graphics& g)
+{
+    KAPPanelBase::paint(g);
+    
+    paintComponentLabel(g, mGain);
 }
 
 void KAPGainPanel::setParameterID(int inParameterID)
