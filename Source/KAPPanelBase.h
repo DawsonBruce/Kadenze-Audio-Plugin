@@ -13,6 +13,7 @@
 #include "PluginProcessor.h"
 #include "KAPInterfaceDefines.h"
 #include "JuceHeader.h"
+#include "KAPHelperFunctions.h"
 
 class KAPPanelBase
 :   public Component,

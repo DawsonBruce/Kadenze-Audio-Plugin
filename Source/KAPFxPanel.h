@@ -38,5 +38,7 @@ private:
     
     OwnedArray<KAPParameterSlider> mSliders;
     
+    String mLabel;
+    
     KAPFxPanelStyle mStyle;
 };

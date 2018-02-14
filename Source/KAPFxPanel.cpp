@@ -15,9 +15,6 @@ KAPFxPanel::KAPFxPanel(KadenzeAudioPluginAudioProcessor* processor)
 {
     setSize(FX_PANEL_WIDTH,
             FX_PANEL_HEIGHT);
-        
-    DBG("FX_PANEL_WIDTH: " << FX_PANEL_WIDTH);
-    DBG("FX_PANEL_HEIGHT: " << FX_PANEL_HEIGHT);
 }
 
 KAPFxPanel::~KAPFxPanel()
@@ -35,18 +32,16 @@ void KAPFxPanel::visibilityChanged()
 
 void KAPFxPanel::paint(Graphics& g)
 {
-    String label;
-    switch (mStyle) {
-        case (kKAPFxPanelStyle_Delay):{
-            label = "delay";
-        }break;
-            
-        case (kKAPFxPanelStyle_Chorus):{
-            label = "chorus";
-        }break;
-    }
+    /** base paint routine */
+    KAPPanelBase::paint(g);
     
-    g.drawFittedText(label, 0, 0, getWidth(), 100, Justification::centred, 1);
+    /** draw FX label */
+    g.drawFittedText(mLabel, 0, 0, getWidth(), 100, Justification::centred, 1);
+    
+    /** paint slider labels */
+    for(int i = 0; i < mSliders.size(); i++){
+        paintComponentLabel(g, mSliders[i]);
+    }
 }
 
 void KAPFxPanel::setFxPanelStyle(KAPFxPanelStyle inStyle)
@@ -83,6 +78,7 @@ void KAPFxPanel::setFxPanelStyle(KAPFxPanelStyle inStyle)
             addAndMakeVisible(wetdry);
             x = x + (size*2);
             
+            mLabel = "DELAY";
         } break;
             
         case (kKAPFxPanelStyle_Chorus):
@@ -107,6 +103,8 @@ void KAPFxPanel::setFxPanelStyle(KAPFxPanelStyle inStyle)
             mSliders.add(wetdry);
             addAndMakeVisible(wetdry);
             x = x + (size*2);
+            
+            mLabel = "CHORUS";
         } break;
     }
 }
