@@ -69,6 +69,10 @@ public:
     
     int getLastOpenedPanel();
     
+    float getInputGainMeterLevel(int inChannel);
+    
+    float getOutputGainMeterLevel(int inChannel);
+    
     KAPPresetManager* getPresetManager();
 
     // Our parameters

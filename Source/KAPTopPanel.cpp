@@ -82,6 +82,7 @@ void KAPTopPanel::displaySaveAsPopup()
     }
     
     AlertWindow window ("Save As","Please Enter a name for you preset.", AlertWindow::NoIcon);
+    window.centreAroundComponent(this, getWidth(), getHeight());
     window.addTextEditor("presetName", currentPresetName, "preset name:");
     window.addButton("Confirm", 1);
     window.addButton("Cancel", 0);

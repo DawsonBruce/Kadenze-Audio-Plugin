@@ -262,6 +262,16 @@ int KadenzeAudioPluginAudioProcessor::getLastOpenedPanel()
     return mLastOpenedPanel;
 }
 
+float KadenzeAudioPluginAudioProcessor::getInputGainMeterLevel(int inChannel)
+{
+    return mInputGain[inChannel]->getMeterLevel();
+}
+
+float KadenzeAudioPluginAudioProcessor::getOutputGainMeterLevel(int inChannel)
+{
+    return mOutputGain[inChannel]->getMeterLevel();
+}
+
 KAPPresetManager* KadenzeAudioPluginAudioProcessor::getPresetManager()
 {
     return mPresetManager;

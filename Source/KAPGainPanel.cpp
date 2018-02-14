@@ -23,10 +23,16 @@ KAPGainPanel::~KAPGainPanel()
 
 void KAPGainPanel::setParameterID(int inParameterID)
 {
-    const int size = 54;
+    const int slider_size = 54;
     mGain = new KAPParameterSlider(mProcessor->parameters[inParameterID]);
-    mGain->setBounds(getWidth()*0.5 - size*0.5, size*0.5, size, size);
+    mGain->setBounds(getWidth()*0.5 - slider_size*0.5, slider_size*0.5, slider_size, slider_size);
     addAndMakeVisible(mGain);
+    
+    const int vu_size = 36;
+    mVuMeter = new KAPVuMeter(mProcessor);
+    mVuMeter->setParameterID(inParameterID);
+    mVuMeter->setBounds(getWidth()*0.5 - vu_size*0.5, vu_size*3, vu_size, vu_size*3);
+    addAndMakeVisible(mVuMeter);
 }
 
 void KAPGainPanel::changeListenerCallback (ChangeBroadcaster* source)
