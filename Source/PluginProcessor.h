@@ -23,7 +23,7 @@
 //==============================================================================
 /**
 */
-class KadenzeAudioPluginAudioProcessor  : public AudioProcessor
+class KadenzeAudioPluginAudioProcessor  : public AudioProcessor, public ChangeBroadcaster
 {
 public:
     //==============================================================================

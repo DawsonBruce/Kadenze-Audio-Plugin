@@ -250,6 +250,7 @@ void KadenzeAudioPluginAudioProcessor::setParameter (int parameterIndex, float n
     DBG("parameter : " << parameterIndex);
     DBG("value : " << newValue);
     AudioProcessor::setParameter(parameterIndex, newValue);
+    sendChangeMessage();
 }
 
 void KadenzeAudioPluginAudioProcessor::setLastOpenedPanel(int inPanelID)

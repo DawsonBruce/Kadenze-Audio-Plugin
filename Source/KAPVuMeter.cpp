@@ -76,7 +76,12 @@ void KAPVuMeter::timerCallback()
         mCh1Level = kKAPMeterSmoothingCoeff*(mCh1Level - updatedCh1Level) + updatedCh1Level;
     }
     
-    repaint();
+    mCh0Level = kap_denorm(mCh0Level);
+    mCh1Level = kap_denorm(mCh1Level);
+    
+    if(mCh0Level && mCh1Level){
+        repaint();
+    }
 }
 
 void KAPVuMeter::setParameterID(int inParameterID)

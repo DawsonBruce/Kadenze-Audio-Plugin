@@ -55,10 +55,10 @@
             file="Source/KAPHelperFunctions.h"/>
       <FILE id="H27bcO" name="KAPAudioFunctions.h" compile="0" resource="0"
             file="Source/KAPAudioFunctions.h"/>
-      <FILE id="MAyX5O" name="KAPUsedParameters.h" compile="0" resource="0"
-            file="Source/KAPUsedParameters.h"/>
     </GROUP>
     <GROUP id="{A2EAFC84-037E-E1B3-36F9-C9D2360B82F9}" name="Parameters">
+      <FILE id="MAyX5O" name="KAPUsedParameters.h" compile="0" resource="0"
+            file="Source/KAPUsedParameters.h"/>
       <FILE id="G7ihM1" name="KAPParameterComboBox.cpp" compile="1" resource="0"
             file="Source/KAPParameterComboBox.cpp"/>
       <FILE id="pvZWjl" name="KAPParameterComboBox.h" compile="0" resource="0"

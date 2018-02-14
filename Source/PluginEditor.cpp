@@ -25,27 +25,6 @@ KadenzeAudioPluginAudioProcessorEditor::KadenzeAudioPluginAudioProcessorEditor (
     mMainPanel = new KAPMainPanel(&processor);
     mMainPanel->setTopLeftPosition(0, 0);
     addAndMakeVisible(mMainPanel);
-    
-//    int x = 55;
-//    int y = 10;
-//    const int size = 64;
-//    
-//    for(int i = 0; i < kParameter_TotalNumParameters; i++){
-//        mParameterSlider[i] = new KAPParameterSlider(processor.parameters[i]);
-//        mParameterSlider[i]->setBounds(x, y, size, size);
-//        addAndMakeVisible(mParameterSlider[i]);
-//        
-//        mLabel[i] = new Label(String(), mParameterSlider[i]->getName());
-//        mLabel[i]->attachToComponent(mParameterSlider[i], true);
-//        addAndMakeVisible(mLabel[i]);
-//        
-//        if((y+size) > (getHeight() - size)){
-//            y = 10;
-//            x = x + (size*2);
-//        } else {
-//            y = y + size;
-//        }
-//    }
 }
 
 KadenzeAudioPluginAudioProcessorEditor::~KadenzeAudioPluginAudioProcessorEditor()
