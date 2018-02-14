@@ -13,6 +13,12 @@
               pluginRTASCategory="" aaxIdentifier="com.yourcompany.KadenzeAudioPlugin"
               pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="5.1.2">
   <MAINGROUP id="rSokST" name="KadenzeAudioPlugin">
+    <GROUP id="{39B004F2-71C3-8F03-A35C-318A020AA5C4}" name="Managers">
+      <FILE id="IAtXN2" name="KAPPresetManager.cpp" compile="1" resource="0"
+            file="Source/KAPPresetManager.cpp"/>
+      <FILE id="opqGFH" name="KAPPresetManager.h" compile="0" resource="0"
+            file="Source/KAPPresetManager.h"/>
+    </GROUP>
     <GROUP id="{D5228E00-1CF7-295B-BDF8-45CC1DD773AF}" name="UI">
       <GROUP id="{E9DC4DA1-C136-0540-154A-C068E8ED8540}" name="Components">
         <FILE id="rbOkxJ" name="KAPVuMeter.cpp" compile="1" resource="0" file="Source/KAPVuMeter.cpp"/>

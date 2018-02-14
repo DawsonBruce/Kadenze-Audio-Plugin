@@ -15,14 +15,22 @@ KAPFxPanel::KAPFxPanel(KadenzeAudioPluginAudioProcessor* processor)
 {
     setSize(FX_PANEL_WIDTH,
             FX_PANEL_HEIGHT);
-    
+        
     DBG("FX_PANEL_WIDTH: " << FX_PANEL_WIDTH);
     DBG("FX_PANEL_HEIGHT: " << FX_PANEL_HEIGHT);
 }
 
 KAPFxPanel::~KAPFxPanel()
-{
+{    
     mSliders.clear();
+}
+
+void KAPFxPanel::visibilityChanged()
+{
+    /** update slider positions when set visible */
+    for(int i = 0; i < mSliders.size(); i++){
+        mSliders[i]->updateValue();
+    }
 }
 
 void KAPFxPanel::paint(Graphics& g)
@@ -100,5 +108,13 @@ void KAPFxPanel::setFxPanelStyle(KAPFxPanelStyle inStyle)
             addAndMakeVisible(wetdry);
             x = x + (size*2);
         } break;
+    }
+}
+
+void KAPFxPanel::changeListenerCallback (ChangeBroadcaster* source)
+{
+    /** update slider positions when set visible */
+    for(int i = 0; i < mSliders.size(); i++){
+        mSliders[i]->updateValue();
     }
 }

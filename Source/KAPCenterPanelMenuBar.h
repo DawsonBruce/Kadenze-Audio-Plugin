@@ -25,5 +25,8 @@ public:
     
 private:
     
+    /** override as needed in derived panels. */
+    void changeListenerCallback (ChangeBroadcaster* source) override;
+    
     ScopedPointer<KAPParameterComboBox> mFxType;
 };

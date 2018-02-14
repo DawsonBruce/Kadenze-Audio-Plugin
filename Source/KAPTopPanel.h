@@ -13,11 +13,31 @@
 #include "KAPPanelBase.h"
 
 class KAPTopPanel
-:   public KAPPanelBase
+:   public KAPPanelBase,
+    public Button::Listener,
+    public ComboBox::Listener
 {
 public:
     KAPTopPanel(KadenzeAudioPluginAudioProcessor* processor);
     ~KAPTopPanel();
     
+    void paint(Graphics& g) override;
+    
 private:
+    
+    /** internal function displays popup menu for 'save as' functionality */
+    void displaySaveAsPopup();
+    
+    /** listener override */
+    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
+    
+    /** button::listener override */
+    void buttonClicked(Button* b) override;
+    
+    void changeListenerCallback (ChangeBroadcaster* source) override;
+    
+    ScopedPointer<ComboBox> mPresetDisplay;
+    
+    ScopedPointer<TextButton> mNewPreset, mSavePreset, mSaveAsPreset;
+    
 };

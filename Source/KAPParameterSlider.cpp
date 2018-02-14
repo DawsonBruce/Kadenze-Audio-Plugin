@@ -17,7 +17,7 @@ KAPParameterSlider::KAPParameterSlider(AudioProcessorParameter* p)
     setSliderStyle(SliderStyle::RotaryHorizontalVerticalDrag);
     setTextBoxStyle(Slider::TextEntryBoxPosition::TextBoxBelow, false, 0, 0);
     setRange(0.f, 1.f, 0.001f);
-    setValue(mParameter->getValue(), dontSendNotification);
+    updateValue();
     
 }
 
@@ -45,4 +45,9 @@ void KAPParameterSlider::startedDragging()
 void KAPParameterSlider::stoppedDragging()
 {
     mParameter->endChangeGesture();
+}
+
+void KAPParameterSlider::updateValue()
+{
+    setValue(mParameter->getValue(), dontSendNotification);
 }

@@ -26,10 +26,15 @@ public:
     KAPFxPanel(KadenzeAudioPluginAudioProcessor* processor);
     ~KAPFxPanel();
     
+    /** component override */
+    void visibilityChanged() override;
+    
     void paint(Graphics& g) override;
     
     void setFxPanelStyle(KAPFxPanelStyle inStyle);
 private:
+    
+    void changeListenerCallback (ChangeBroadcaster* source) override;
     
     OwnedArray<KAPParameterSlider> mSliders;
     

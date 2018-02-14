@@ -60,6 +60,12 @@ void KAPCenterPanel::showPanel(int inPanelID)
     mProcessor->setLastOpenedPanel(inPanelID);
 }
 
+void KAPCenterPanel::changeListenerCallback (ChangeBroadcaster* source)
+{
+    const int panelToShow = mProcessor->getParameter(kParameter_DelayType);
+    showPanel(panelToShow);
+}
+
 void KAPCenterPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 {
     const int panel = comboBoxThatHasChanged->getSelectedItemIndex();
