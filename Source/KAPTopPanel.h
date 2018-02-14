@@ -21,6 +21,8 @@ public:
     KAPTopPanel(KadenzeAudioPluginAudioProcessor* processor);
     ~KAPTopPanel();
     
+    void paint(Graphics& g) override;
+    
 private:
     
     /** internal function displays popup menu for 'save as' functionality */

@@ -52,7 +52,7 @@ void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inW
             mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-time);
         } else if(inType == kKAPDelayType_Chorus){
             
-            const double delayTimeModulation = time + (0.003 + 0.002 * inModulationBuffer[i]);
+            const double delayTimeModulation = (0.003 + 0.002 * inModulationBuffer[i]);
             mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-delayTimeModulation);
         }
         
