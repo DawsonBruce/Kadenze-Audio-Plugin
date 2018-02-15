@@ -28,7 +28,7 @@ void KAPVuMeter::paint(Graphics& g)
 {
     const int meter_width = getWidth() / 3;
     
-    g.setColour(Colour(75,75,75).withAlpha(0.4f));
+    g.setColour(Colours::black);
     g.fillRect(0, 0, meter_width, getHeight());
     g.fillRect(meter_width*2, 0, meter_width, getHeight());
     
@@ -43,6 +43,7 @@ void KAPVuMeter::paint(Graphics& g)
         ch1fill = 0;
     }
     
+    g.setColour(Colour(75,75,75));
     g.fillRect(0, ch0fill, meter_width, getHeight());
     g.fillRect(meter_width*2, ch1fill, meter_width, getHeight());
 }

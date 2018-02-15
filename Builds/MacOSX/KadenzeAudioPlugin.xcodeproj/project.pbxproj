@@ -43,6 +43,7 @@
 		3DFC9E621D94E6C500F5213D = {isa = PBXBuildFile; fileRef = 4BC5C093CDE5A70A835D0B5C; };
 		7E4C55589BCAA4C040872785 = {isa = PBXBuildFile; fileRef = A01929E03D3749CBFF8D8CED; };
 		5890CF13404F85264853CDFE = {isa = PBXBuildFile; fileRef = E6DE3E6CD7AE501762DCA72B; };
+		6AE2EFF17ACA6643259DBD6A = {isa = PBXBuildFile; fileRef = 0C908FF4409B7B19513BE4B7; };
 		1A7108E4D1A30D57656E0149 = {isa = PBXBuildFile; fileRef = 7027E20F9DE71FF5BC75595D; };
 		C7AEA083622BB2DB5091E17C = {isa = PBXBuildFile; fileRef = 0ED80F8DD0F3592320FF399F; };
 		BF2427E5266922E10747249C = {isa = PBXBuildFile; fileRef = 8B6EF5945B0B854E12754D72; };
@@ -70,6 +71,7 @@
 		0941B81D3D20412A117A2FED = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = KAPPresetManager.cpp; path = ../../Source/KAPPresetManager.cpp; sourceTree = "SOURCE_ROOT"; };
 		0C6711F1528E3A3199455B65 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_data_structures.mm"; path = "../../JuceLibraryCode/include_juce_data_structures.mm"; sourceTree = "SOURCE_ROOT"; };
 		0C781D2253CF6FA91C5E8F5E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPParameterSlider.h; path = ../../Source/KAPParameterSlider.h; sourceTree = "SOURCE_ROOT"; };
+		0C908FF4409B7B19513BE4B7 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryData.cpp; path = ../../JuceLibraryCode/BinaryData.cpp; sourceTree = "SOURCE_ROOT"; };
 		0ED80F8DD0F3592320FF399F = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_audio_devices.mm"; path = "../../JuceLibraryCode/include_juce_audio_devices.mm"; sourceTree = "SOURCE_ROOT"; };
 		112C3F69403453FC2310538E = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Standalone_Plugin.plist"; path = "Info-Standalone_Plugin.plist"; sourceTree = "SOURCE_ROOT"; };
 		11CE9553E2D940D539B1ECC3 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPPanelBase.h; path = ../../Source/KAPPanelBase.h; sourceTree = "SOURCE_ROOT"; };
@@ -84,6 +86,7 @@
 		37918DB29ED32614869AA0B4 = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_gui_extra"; path = "../../../../../../Development/juce-grapefruit-osx/modules/juce_gui_extra"; sourceTree = "SOURCE_ROOT"; };
 		39DDE054BC41A92F003A0922 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = KAPGain.cpp; path = ../../Source/KAPGain.cpp; sourceTree = "SOURCE_ROOT"; };
 		3D50F51F96157838BC32703E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPParameterComboBox.h; path = ../../Source/KAPParameterComboBox.h; sourceTree = "SOURCE_ROOT"; };
+		3F7CE37B860BC5A4AC1D4D08 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPVuMeter.h; path = ../../Source/KAPVuMeter.h; sourceTree = "SOURCE_ROOT"; };
 		42142A8F1597DA6FA72D645B = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_graphics"; path = "../../../../../../Development/juce-grapefruit-osx/modules/juce_graphics"; sourceTree = "SOURCE_ROOT"; };
 		477EC867B7A1F68071C32D8F = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_graphics.mm"; path = "../../JuceLibraryCode/include_juce_graphics.mm"; sourceTree = "SOURCE_ROOT"; };
 		4A6A95DF4598FE0E41A2CE38 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = KAPTopPanel.cpp; path = ../../Source/KAPTopPanel.cpp; sourceTree = "SOURCE_ROOT"; };
@@ -100,8 +103,8 @@
 		1C1C9FA9F2D8F806FBB7CE61 = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		1EDA6F777A97CF740B556E9E = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		363A871F8CB81F32B031273E = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-AU.plist"; path = "Info-AU.plist"; sourceTree = "SOURCE_ROOT"; };
-		3F7CE37B860BC5A4AC1D4D08 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPVuMeter.h; path = ../../Source/KAPVuMeter.h; sourceTree = "SOURCE_ROOT"; };
 		42C88FCE4CFB7D96F3951F6C = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		52001DEA01457F71ECCBA662 = {isa = PBXFileReference; lastKnownFileType = image.png; name = "kadenze_bg.png"; path = "../../../kadenze_bg.png"; sourceTree = "SOURCE_ROOT"; };
 		5717A4204B141ADBE52D48AA = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiscRecording.framework; path = System/Library/Frameworks/DiscRecording.framework; sourceTree = SDKROOT; };
 		580026323E015B8DFC007864 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_audio_plugin_client_VST_utils.mm"; path = "../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm"; sourceTree = "SOURCE_ROOT"; };
 		5B9C9F592B831DECD5C8E954 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = KAPFxPanel.cpp; path = ../../Source/KAPFxPanel.cpp; sourceTree = "SOURCE_ROOT"; };
@@ -121,6 +124,7 @@
 		83EDC5938A7FFC0D1BB2CDDC = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPUsedParameters.h; path = ../../Source/KAPUsedParameters.h; sourceTree = "SOURCE_ROOT"; };
 		865D65546A7369A9ED02F90D = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = KAPDelay.cpp; path = ../../Source/KAPDelay.cpp; sourceTree = "SOURCE_ROOT"; };
 		882881E2EB3F1089B00B6B86 = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-VST.plist"; path = "Info-VST.plist"; sourceTree = "SOURCE_ROOT"; };
+		89DF70713F9974873D8A04C6 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BinaryData.h; path = ../../JuceLibraryCode/BinaryData.h; sourceTree = "SOURCE_ROOT"; };
 		8B6EF5945B0B854E12754D72 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_audio_formats.mm"; path = "../../JuceLibraryCode/include_juce_audio_formats.mm"; sourceTree = "SOURCE_ROOT"; };
 		90A94E919F14016114E1BD47 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_events.mm"; path = "../../JuceLibraryCode/include_juce_events.mm"; sourceTree = "SOURCE_ROOT"; };
 		9321A6FE500544444453447F = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginEditor.h; path = ../../Source/PluginEditor.h; sourceTree = "SOURCE_ROOT"; };
@@ -144,7 +148,9 @@
 		D06CE80E82F24D844AD68A8D = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_gui_basics"; path = "../../../../../../Development/juce-grapefruit-osx/modules/juce_gui_basics"; sourceTree = "SOURCE_ROOT"; };
 		D0BD1A773948BF6CCE204484 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_gui_basics.mm"; path = "../../JuceLibraryCode/include_juce_gui_basics.mm"; sourceTree = "SOURCE_ROOT"; };
 		D27EDF335578C4350669ACC4 = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_audio_utils"; path = "../../../../../../Development/juce-grapefruit-osx/modules/juce_audio_utils"; sourceTree = "SOURCE_ROOT"; };
+		D7E38F3C96896E85DCACA910 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPLookAndFeel.h; path = ../../Source/KAPLookAndFeel.h; sourceTree = "SOURCE_ROOT"; };
 		DB4E80B4CFA53D84B0A9ED26 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceHeader.h; path = ../../JuceLibraryCode/JuceHeader.h; sourceTree = "SOURCE_ROOT"; };
+		DCDDA111CE38A1E31AB2ECA3 = {isa = PBXFileReference; lastKnownFileType = image.png; name = "kadenze_knob.png"; path = "../../../kadenze_knob.png"; sourceTree = "SOURCE_ROOT"; };
 		DFEC9D11C140071D15A206DD = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = KadenzeAudioPlugin.entitlements; path = KadenzeAudioPlugin.entitlements; sourceTree = "SOURCE_ROOT"; };
 		E01DCA5712BABB087FA5A1E0 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPAudioFunctions.h; path = ../../Source/KAPAudioFunctions.h; sourceTree = "SOURCE_ROOT"; };
 		E36EBBE22C03D660D77DFD45 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPInterfaceDefines.h; path = ../../Source/KAPInterfaceDefines.h; sourceTree = "SOURCE_ROOT"; };
@@ -163,6 +169,11 @@
 		F77ECE357886A94C3F8626A4 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPGainPanel.h; path = ../../Source/KAPGainPanel.h; sourceTree = "SOURCE_ROOT"; };
 		FAD9496E9ECE802710AA861B = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		FBBFCE4A128B7A0D51D2D998 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KAPCenterPanelMenuBar.h; path = ../../Source/KAPCenterPanelMenuBar.h; sourceTree = "SOURCE_ROOT"; };
+		B49619E114F0FAE0C7114B1E = {isa = PBXGroup; children = (
+					D7E38F3C96896E85DCACA910, ); name = LookAndFeel; sourceTree = "<group>"; };
+		5B65ABCFD57A75A39F112ED3 = {isa = PBXGroup; children = (
+					DCDDA111CE38A1E31AB2ECA3,
+					52001DEA01457F71ECCBA662, ); name = Assets; sourceTree = "<group>"; };
 		90DE2C66627672DCE1FD6D32 = {isa = PBXGroup; children = (
 					0941B81D3D20412A117A2FED,
 					34EF252CC89564059CE2DAF6, ); name = Managers; sourceTree = "<group>"; };
@@ -210,6 +221,8 @@
 					E6DE3E6CD7AE501762DCA72B,
 					9321A6FE500544444453447F, ); name = Source; sourceTree = "<group>"; };
 		8296776AE8EC33DFC790A27D = {isa = PBXGroup; children = (
+					B49619E114F0FAE0C7114B1E,
+					5B65ABCFD57A75A39F112ED3,
 					90DE2C66627672DCE1FD6D32,
 					A1EBA3D3C1FB6F619DEAE662,
 					2F15184E34AE3B4BA2156EE1,
@@ -234,6 +247,8 @@
 					ECAD5A185447B40C370A048B, ); name = "Juce Modules"; sourceTree = "<group>"; };
 		C14F5C0C45C8BCCC3FE67AFC = {isa = PBXGroup; children = (
 					1283CAA7536AC60D9FB98A6F,
+					0C908FF4409B7B19513BE4B7,
+					89DF70713F9974873D8A04C6,
 					7027E20F9DE71FF5BC75595D,
 					0ED80F8DD0F3592320FF399F,
 					8B6EF5945B0B854E12754D72,
@@ -767,6 +782,7 @@
 					3DFC9E621D94E6C500F5213D,
 					7E4C55589BCAA4C040872785,
 					5890CF13404F85264853CDFE,
+					6AE2EFF17ACA6643259DBD6A,
 					1A7108E4D1A30D57656E0149,
 					C7AEA083622BB2DB5091E17C,
 					BF2427E5266922E10747249C,

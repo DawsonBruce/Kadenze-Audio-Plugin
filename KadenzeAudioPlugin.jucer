@@ -13,6 +13,16 @@
               pluginRTASCategory="" aaxIdentifier="com.yourcompany.KadenzeAudioPlugin"
               pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="5.1.2">
   <MAINGROUP id="rSokST" name="KadenzeAudioPlugin">
+    <GROUP id="{CD103D61-05C5-5B5F-0B6E-F2A22800253F}" name="LookAndFeel">
+      <FILE id="qi7TTv" name="KAPLookAndFeel.h" compile="0" resource="0"
+            file="Source/KAPLookAndFeel.h"/>
+    </GROUP>
+    <GROUP id="{35F046FE-E9C7-3C6D-E727-B28083BEED8E}" name="Assets">
+      <FILE id="RZYkBB" name="kadenze_knob.png" compile="0" resource="1"
+            file="../kadenze_knob.png"/>
+      <FILE id="UjXcHc" name="kadenze_bg.png" compile="0" resource="1" file="../kadenze_bg.png"
+            xcodeResource="0"/>
+    </GROUP>
     <GROUP id="{39B004F2-71C3-8F03-A35C-318A020AA5C4}" name="Managers">
       <FILE id="IAtXN2" name="KAPPresetManager.cpp" compile="1" resource="0"
             file="Source/KAPPresetManager.cpp"/>
