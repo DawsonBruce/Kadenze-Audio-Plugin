@@ -35,8 +35,11 @@ void KAPFxPanel::paint(Graphics& g)
     /** base paint routine */
     KAPPanelBase::paint(g);
     
+    g.setColour(KAPColour_5);
+    g.setFont(font_3);
+    
     /** draw FX label */
-    g.drawFittedText(mLabel, 0, 0, getWidth(), 100, Justification::centred, 1);
+    g.drawText(mLabel, 0, 0, getWidth(), 80, Justification::centred, false);
     
     /** paint slider labels */
     for(int i = 0; i < mSliders.size(); i++){

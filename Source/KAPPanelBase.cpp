@@ -29,6 +29,4 @@ KAPPanelBase::~KAPPanelBase()
 
 void KAPPanelBase::paint(Graphics& g)
 {
-    g.setColour(Colour(75,75,75));
-    g.drawRect(0, 0, getWidth(), getHeight());
 }

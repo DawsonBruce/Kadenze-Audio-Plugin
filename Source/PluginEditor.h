@@ -15,6 +15,7 @@
 #include "KAPParameterSlider.h"
 
 #include "KAPMainPanel.h"
+#include "KAPLookAndFeel.h"
 
 //==============================================================================
 /**
@@ -31,8 +32,9 @@ public:
 
 private:
     
-    ScopedPointer<KAPMainPanel> mMainPanel;
+    ScopedPointer<KAPLookAndFeel> mLookAndFeel;
     
+    ScopedPointer<KAPMainPanel> mMainPanel;
     ScopedPointer<KAPParameterSlider> mParameterSlider[kParameter_TotalNumParameters];
     ScopedPointer<Label> mLabel[kParameter_TotalNumParameters];
     

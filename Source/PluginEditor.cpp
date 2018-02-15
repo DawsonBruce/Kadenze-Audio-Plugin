@@ -25,6 +25,10 @@ KadenzeAudioPluginAudioProcessorEditor::KadenzeAudioPluginAudioProcessorEditor (
     mMainPanel = new KAPMainPanel(&processor);
     mMainPanel->setTopLeftPosition(0, 0);
     addAndMakeVisible(mMainPanel);
+    
+    mLookAndFeel = new KAPLookAndFeel();
+    setLookAndFeel(mLookAndFeel);
+    LookAndFeel::setDefaultLookAndFeel(mLookAndFeel);
 }
 
 KadenzeAudioPluginAudioProcessorEditor::~KadenzeAudioPluginAudioProcessorEditor()
@@ -33,13 +37,9 @@ KadenzeAudioPluginAudioProcessorEditor::~KadenzeAudioPluginAudioProcessorEditor(
 
 //==============================================================================
 void KadenzeAudioPluginAudioProcessorEditor::paint (Graphics& g)
-{
-    g.setGradientFill(ColourGradient(Colour(235,235,235),
-                                     getWidth()*0.5, 0,
-                                     Colour(205,205,205),
-                                     getWidth()*0.5, getHeight(),
-                                     false));
-    g.fillAll();
+{    
+    Image bg = ImageCache::getFromMemory(BinaryData::kadenze_bg_png, BinaryData::kadenze_bg_pngSize);
+    g.drawImage(bg, juce::Rectangle<float>(0,0,getWidth(),getHeight()));
 }
 
 void KadenzeAudioPluginAudioProcessorEditor::resized()
