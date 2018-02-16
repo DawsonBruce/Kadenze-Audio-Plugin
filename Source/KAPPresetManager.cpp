@@ -98,7 +98,7 @@ void KAPPresetManager::savePreset()
     /** append data */
     mCurrentlyLoadedPreset.appendData(destinationData.getData(), destinationData.getSize());
     
-    sendChangeMessage();
+    sendChangeMessageLambda();
 }
 
 void KAPPresetManager::saveAsPreset(String inPresetName)
@@ -117,7 +117,7 @@ void KAPPresetManager::saveAsPreset(String inPresetName)
     presetFile.appendData(destinationData.getData(), destinationData.getSize());
     
     storeLocalPresets();
-    sendChangeMessage();
+    sendChangeMessageLambda();
 }
 
 void KAPPresetManager::loadPreset(int inPresetIndex)
@@ -128,13 +128,22 @@ void KAPPresetManager::loadPreset(int inPresetIndex)
     if(mCurrentlyLoadedPreset.loadFileAsData(presetBinary)){
         mCurrentPresetIsSaved = true;
         mProcessor->setStateInformation(presetBinary.getData(), (int)presetBinary.getSize());
-        sendChangeMessage();
+        sendChangeMessageLambda();
     }
 }
 
 bool KAPPresetManager::getIsCurrentPresetSaved()
 {
     return mCurrentPresetIsSaved;
+}
+
+void KAPPresetManager::sendChangeMessageLambda()
+{
+    std::function<void(void)> changeMessageLambda = [this](){
+        this->sendChangeMessage();
+    };
+    
+    MessageManager::getInstance()->callAsync(changeMessageLambda);
 }
 
 void KAPPresetManager::storeLocalPresets()

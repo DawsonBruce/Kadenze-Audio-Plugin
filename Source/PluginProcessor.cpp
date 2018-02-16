@@ -249,8 +249,14 @@ void KadenzeAudioPluginAudioProcessor::setParameter (int parameterIndex, float n
 {
     DBG("parameter : " << parameterIndex);
     DBG("value : " << newValue);
+    
+    
+    std::function<void(void)> changeMessageLambda = [this](){
+        this->sendChangeMessage();
+    };
+    
     AudioProcessor::setParameter(parameterIndex, newValue);
-    sendChangeMessage();
+    MessageManager::getInstance()->callAsync(changeMessageLambda);
 }
 
 void KadenzeAudioPluginAudioProcessor::setLastOpenedPanel(int inPanelID)
