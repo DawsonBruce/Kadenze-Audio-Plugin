@@ -12,7 +12,6 @@
 
 KAPLfo::KAPLfo()
 {
-    reset();
 }
 
 KAPLfo::~KAPLfo()
@@ -30,20 +29,8 @@ void KAPLfo::reset()
 {
     /** sine */
     mPhase = 0.0;
-    mPhaseShift = 0.0;
     mPreviousRate = 0.0;
-    
-    mTableSize = (int)kMaxChannelBufferSize * 0.5;
-    mInvTableSize = 1.0f / mTableSize;
-    mRange = 4.0f * kPI;
-    mInvRange = 1.0f / mRange;
     mDelta = 1.0 / mSampleRate;
-    mTableWidth = (float)mTableSize / mRange;
-    
-    for(int i = 0; i < mTableSize; i++){
-        mSinTable[i] = sinf(mRange * i * mInvTableSize);
-        mCosTable[i] = cosf(mRange * i * mInvTableSize);
-    }
 }
 
 void KAPLfo::process(float inRate,
@@ -68,20 +55,11 @@ void KAPLfo::process(float inRate,
             mPhase = mPhase - kPI2;
         }
         
-        if(mPhase < -1.f){
-            mPhase = 1.f;
+        if(mPhase < 0.f){
+            mPhase = 0.f;
         }
         
-//        DBG("mPhase: " << mPhase);
-    }
-    
-    /** calculate phase */
-    for(int i = 0; i < inNumSamplesToRender; i++){
-        
-        float address = mPhase * mTableWidth;
-        int index = address;
-        float delta = address - index;
-        
-        outAudio[i] = (mSinTable[index] + delta * (mSinTable[index+1] - mSinTable[index])) * inDepth;
+        float lfoPosition = sinf(mPhase) * inDepth;
+        outAudio[i] = lfoPosition;
     }
 }

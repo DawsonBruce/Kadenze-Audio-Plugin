@@ -26,6 +26,8 @@ static const double kPIHalf	= 1.5707963267948966192313216916397514420985846996;
 static const double kPI = 3.1415926535897932384626433832795028841968;
 static const double kPI2 = 6.2831853071795864769252867665590057683943;
 
+// use M_PI for mac, and mention that it's not defined on windows
+
 static inline float ratioTodB(float inVal){
     return 20.0f*log10(inVal) ;
 }
