@@ -31,18 +31,7 @@ public:
     
 private:
     
-    /** sine variables */
-    int mTableSize;
+    /** sine variables */    
     float mPhase;
-    float mPhaseShift;
-    float mPreviousPhaseShift;
-    float mDelta;
-    float mPreviousRate;
-    float mSinTable[kMaxChannelBufferSize];
-    float mCosTable[kMaxChannelBufferSize];
-    float mInvTableSize;
-    float mRange;
-    float mInvRange;
-    float mTableWidth;
     double mSampleRate;
 };
