@@ -33,7 +33,5 @@ private:
     
     /** sine variables */    
     float mPhase;
-    float mDelta;
-    float mPreviousRate;
     double mSampleRate;
 };

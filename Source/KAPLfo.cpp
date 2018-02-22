@@ -12,6 +12,7 @@
 
 KAPLfo::KAPLfo()
 {
+    reset();
 }
 
 KAPLfo::~KAPLfo()
@@ -27,10 +28,7 @@ void KAPLfo::setSampleRate(double inSampleRate)
 
 void KAPLfo::reset()
 {
-    /** sine */
     mPhase = 0.0;
-    mPreviousRate = 0.0;
-    mDelta = 1.0 / mSampleRate;
 }
 
 void KAPLfo::process(float inRate,
@@ -39,27 +37,18 @@ void KAPLfo::process(float inRate,
                      int inNumSamplesToRender)
 {
     
-    float rate = jmap(inRate, 0.f, 1.f, 0.01f, 10.f);
-    rate = rate * mDelta;
-    
-    if(mPreviousRate != rate){
-        mPhase = mPhase + (mPreviousRate / rate) * mPhase - mPhase;
-        mPreviousRate = rate;
-    }
+    const float rate = jmap(inRate, 0.f, 1.f, 0.01f, 10.f);
     
     /** calculate phase */
     for(int i = 0; i < inNumSamplesToRender; i++){
-        mPhase = mPhase + kPI2 * rate;
         
-        if(mPhase > kPI2){
-            mPhase = mPhase - kPI2;
+        mPhase = mPhase + (rate / mSampleRate);
+        
+        if(mPhase > 1.f){
+            mPhase = mPhase - 1.f;
         }
         
-        if(mPhase < 0.f){
-            mPhase = 0.f;
-        }
-        
-        float lfoPosition = sinf(mPhase) * inDepth;
+        const float lfoPosition = sinf(mPhase * kPI2) * inDepth;
         outAudio[i] = lfoPosition;
     }
 }
