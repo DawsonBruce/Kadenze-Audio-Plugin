@@ -13,6 +13,7 @@
 
 KAPPresetManager::KAPPresetManager(AudioProcessor* inProcessor)
 :   mCurrentPresetIsSaved(false),
+    mCurrentPresetName("Untitled"),
     mProcessor(inProcessor)
 {
     const String pluginName = (String)mProcessor->getName();
@@ -83,12 +84,11 @@ void KAPPresetManager::createNewPreset()
     
     /** update our bool */
     mCurrentPresetIsSaved = false;
+    mCurrentPresetName = "Untitled";
 }
 
 void KAPPresetManager::savePreset()
 {
-    DBG("SAVE!");
-    
     MemoryBlock destinationData;
     mProcessor->getStateInformation(destinationData);
     
@@ -98,6 +98,7 @@ void KAPPresetManager::savePreset()
     /** append data */
     mCurrentlyLoadedPreset.appendData(destinationData.getData(), destinationData.getSize());
     
+    mCurrentPresetIsSaved = true;
     sendChangeMessageLambda();
 }
 
@@ -116,6 +117,9 @@ void KAPPresetManager::saveAsPreset(String inPresetName)
     
     presetFile.appendData(destinationData.getData(), destinationData.getSize());
     
+    mCurrentPresetIsSaved = true;
+    mCurrentPresetName = inPresetName;
+    
     storeLocalPresets();
     sendChangeMessageLambda();
 }
@@ -127,6 +131,7 @@ void KAPPresetManager::loadPreset(int inPresetIndex)
     
     if(mCurrentlyLoadedPreset.loadFileAsData(presetBinary)){
         mCurrentPresetIsSaved = true;
+        mCurrentPresetName = getPresetName(inPresetIndex);
         mProcessor->setStateInformation(presetBinary.getData(), (int)presetBinary.getSize());
         sendChangeMessageLambda();
     }
@@ -135,6 +140,11 @@ void KAPPresetManager::loadPreset(int inPresetIndex)
 bool KAPPresetManager::getIsCurrentPresetSaved()
 {
     return mCurrentPresetIsSaved;
+}
+
+String KAPPresetManager::getCurrentPresetName()
+{
+    return mCurrentPresetName;
 }
 
 void KAPPresetManager::sendChangeMessageLambda()

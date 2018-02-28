@@ -45,7 +45,6 @@ KAPTopPanel::KAPTopPanel(KadenzeAudioPluginAudioProcessor* processor)
     const int comboBox_x = TOP_PANEL_WIDTH*0.5 - comboBox_w*0.5;
     
     mPresetDisplay = new ComboBox();
-    mPresetDisplay->setText("Untitled", dontSendNotification);
     mPresetDisplay->setBounds(comboBox_x, button_y, comboBox_w, button_h);
     mPresetDisplay->addListener(this);
     addAndMakeVisible(mPresetDisplay);
@@ -56,6 +55,9 @@ KAPTopPanel::KAPTopPanel(KadenzeAudioPluginAudioProcessor* processor)
     for(int i = 0; i < numPresets; i++){
         mPresetDisplay->addItem(presetManager->getPresetName(i), (i+1));
     }
+    
+    String presetName = presetManager->getCurrentPresetName();
+    mPresetDisplay->setText(presetName, dontSendNotification);
 }
 
 KAPTopPanel::~KAPTopPanel()
@@ -78,8 +80,8 @@ void KAPTopPanel::paint(Graphics& g)
 void KAPTopPanel::displaySaveAsPopup()
 {
     KAPPresetManager* presetManager = mProcessor->getPresetManager();
+    String currentPresetName = presetManager->getCurrentPresetName();
     
-    String currentPresetName = mPresetDisplay->getText();
     if(presetManager->getIsCurrentPresetSaved()){
         currentPresetName = currentPresetName + "_2";
     }
@@ -133,18 +135,13 @@ void KAPTopPanel::buttonClicked(Button* b)
 void KAPTopPanel::changeListenerCallback (ChangeBroadcaster* source)
 {
     KAPPresetManager* presetManager = mProcessor->getPresetManager();
-    const int numPresets = presetManager->getNumberOfPresets();
+    String presetName = presetManager->getCurrentPresetName();
     
-    const int selectedItemIndex = mPresetDisplay->getSelectedItemIndex();
     mPresetDisplay->clear(dontSendNotification);
-    
+    const int numPresets = presetManager->getNumberOfPresets();
     for(int i = 0; i < numPresets; i++){
         mPresetDisplay->addItem(presetManager->getPresetName(i), (i+1));
     }
     
-    if(presetManager->getIsCurrentPresetSaved()){
-        mPresetDisplay->setSelectedItemIndex(selectedItemIndex, dontSendNotification);
-    } else {
-        mPresetDisplay->setText("Untitled", dontSendNotification);
-    }
+    mPresetDisplay->setText(presetName, dontSendNotification);
 }

@@ -48,6 +48,11 @@ public:
     /** used for determining if the currently loaded preset is saved on disk. */
     bool getIsCurrentPresetSaved();
     
+    /** used for returning the currently loaded preset name.
+        if no preset is loaded, will return 'Untitled'.
+     */
+    String getCurrentPresetName();
+    
 private:
     
     /** internal */
@@ -60,6 +65,8 @@ private:
     
     File mCurrentlyLoadedPreset;
     Array<File> mLocalPresets;
+    
+    String mCurrentPresetName;
     
     String mPresetDirectory;
     
