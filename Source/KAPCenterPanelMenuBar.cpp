@@ -23,11 +23,11 @@ KAPCenterPanelMenuBar::KAPCenterPanelMenuBar(KadenzeAudioPluginAudioProcessor* p
         "delay",
         "chorus"
     };
-    
-    const int openPanel = mProcessor->getLastOpenedPanel();
-    mFxType = new KAPParameterComboBox(processor->parameters[kParameter_DelayType]);
+
+    AudioProcessorParameter* type = processor->parameters[kParameter_DelayType];
+    mFxType = new KAPParameterComboBox(type);
     mFxType->addItemList(fxTypes, 1);
-    mFxType->setSelectedItemIndex(openPanel, dontSendNotification);
+    mFxType->setSelectedItemIndex(type->getValue(), dontSendNotification);
     mFxType->setBounds(CENTER_PANEL_MENU_BAR_WIDTH - comboBox_w, 0, comboBox_w, comboBox_h);
     addAndMakeVisible(mFxType);
 }
@@ -35,11 +35,6 @@ KAPCenterPanelMenuBar::KAPCenterPanelMenuBar(KadenzeAudioPluginAudioProcessor* p
 KAPCenterPanelMenuBar::~KAPCenterPanelMenuBar()
 {
     
-}
-
-void KAPCenterPanelMenuBar::addFxTypeComboBoxListener(ComboBox::Listener* inListener)
-{
-    mFxType->addListener(inListener);
 }
 
 void KAPCenterPanelMenuBar::changeListenerCallback (ChangeBroadcaster* source)

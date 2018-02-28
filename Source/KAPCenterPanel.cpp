@@ -18,7 +18,6 @@ KAPCenterPanel::KAPCenterPanel(KadenzeAudioPluginAudioProcessor* processor)
     
     mMenuBar = new KAPCenterPanelMenuBar(processor);
     mMenuBar->setTopLeftPosition(0, 0);
-    mMenuBar->addFxTypeComboBoxListener(this);
     addAndMakeVisible(mMenuBar);
     
     mDelayPanel = new KAPFxPanel(processor);
@@ -31,7 +30,8 @@ KAPCenterPanel::KAPCenterPanel(KadenzeAudioPluginAudioProcessor* processor)
     mChorusPanel->setFxPanelStyle(kKAPFxPanelStyle_Chorus);
     addChildComponent(mChorusPanel);
     
-    showPanel(mProcessor->getLastOpenedPanel());
+    const int panelToShow = mProcessor->getParameter(kParameter_DelayType);
+    showPanel(panelToShow);
 }
 
 KAPCenterPanel::~KAPCenterPanel()
@@ -42,32 +42,24 @@ KAPCenterPanel::~KAPCenterPanel()
 void KAPCenterPanel::showPanel(int inPanelID)
 {
     switch(inPanelID){
-        case(kKAPPanelIDs_FxDelay):{
+        case(kKAPFxPanelStyle_Delay):{
             
             mDelayPanel->setVisible(true);
             mChorusPanel->setVisible(false);
             
         }break;
             
-        case(kKAPPanelIDs_FxChorus):{
+        case(kKAPFxPanelStyle_Chorus):{
             
             mDelayPanel->setVisible(false);
             mChorusPanel->setVisible(true);
             
         }break;
     }
-    
-    mProcessor->setLastOpenedPanel(inPanelID);
 }
 
 void KAPCenterPanel::changeListenerCallback (ChangeBroadcaster* source)
 {
     const int panelToShow = mProcessor->getParameter(kParameter_DelayType);
     showPanel(panelToShow);
-}
-
-void KAPCenterPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
-{
-    const int panel = comboBoxThatHasChanged->getSelectedItemIndex();
-    showPanel(panel);
 }

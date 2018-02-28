@@ -65,10 +65,6 @@ public:
     
     void setParameter (int parameterIndex, float newValue) override;
     
-    void setLastOpenedPanel(int inPanelID);
-    
-    int getLastOpenedPanel();
-    
     float getInputGainMeterLevel(int inChannel);
     
     float getOutputGainMeterLevel(int inChannel);
@@ -84,8 +80,6 @@ private:
     void initializeDSP();
     /** internal */
     void initializeParameters();
-    
-    int mLastOpenedPanel;
     
     ScopedPointer<KAPPresetManager> mPresetManager;
     
