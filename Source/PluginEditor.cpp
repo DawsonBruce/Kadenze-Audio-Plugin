@@ -29,6 +29,9 @@ KadenzeAudioPluginAudioProcessorEditor::KadenzeAudioPluginAudioProcessorEditor (
     mLookAndFeel = new KAPLookAndFeel();
     setLookAndFeel(mLookAndFeel);
     LookAndFeel::setDefaultLookAndFeel(mLookAndFeel);
+    
+    mBackground = ImageCache::getFromMemory(BinaryData::kadenze_bg_png,
+                                            BinaryData::kadenze_bg_pngSize);
 }
 
 KadenzeAudioPluginAudioProcessorEditor::~KadenzeAudioPluginAudioProcessorEditor()
@@ -37,9 +40,8 @@ KadenzeAudioPluginAudioProcessorEditor::~KadenzeAudioPluginAudioProcessorEditor(
 
 //==============================================================================
 void KadenzeAudioPluginAudioProcessorEditor::paint (Graphics& g)
-{    
-    Image bg = ImageCache::getFromMemory(BinaryData::kadenze_bg_png, BinaryData::kadenze_bg_pngSize);
-    g.drawImage(bg, juce::Rectangle<float>(0,0,getWidth(),getHeight()));
+{
+    g.drawImage(mBackground, getBounds().toFloat());
 }
 
 void KadenzeAudioPluginAudioProcessorEditor::resized()

@@ -28,13 +28,12 @@ static const double kPI2 = 6.2831853071795864769252867665590057683943;
 
 // use M_PI for mac, and mention that it's not defined on windows
 
-static inline float ratioTodB(float inVal){
-    return 20.0f*log10(inVal) ;
-}
+static inline float dBToNormalizedGain(float inVal){
+    
+    float inValdB = Decibels::gainToDecibels(inVal + 0.00001f);
+    inValdB = (inValdB + 96.f) / 96.f;
 
-static inline float linearToNormalizedLog10(float inVal){
-    float inValdB = ratioTodB(inVal+0.00001f);
-    return (inValdB + 80.0f)*0.01234546483f;
+    return inValdB;
 }
 
 /** simple denormalization function. 

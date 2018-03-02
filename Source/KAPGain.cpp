@@ -40,6 +40,6 @@ void KAPGain::process(float* inAudio,
 
 float KAPGain::getMeterLevel()
 {
-    float normalizedOutput = linearToNormalizedLog10(mOutputSmoothed);
+    float normalizedOutput = dBToNormalizedGain(mOutputSmoothed);
     return normalizedOutput;
 }

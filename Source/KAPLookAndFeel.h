@@ -35,12 +35,37 @@ public:
         setColour(TextButton::textColourOffId, KAPColour_1);
     }
     
-    Font getLabelFont (Label& label) override
+    /** BUTTONS */
+    Font getTextButtonFont (TextButton&, int buttonHeight) override
     {
         return font_1;
     }
     
-    Font getTextButtonFont (TextButton&, int buttonHeight) override
+    void drawButtonBackground (Graphics& g,
+                               Button& button,
+                               const Colour& backgroundColour,
+                               bool isMouseOverButton,
+                               bool isButtonDown) override
+    {
+        Colour fillColour;
+        
+        if(isButtonDown){
+            fillColour = KAPColour_5;
+        } else if(isMouseOverButton){
+            fillColour = KAPColour_4;
+        } else {
+            fillColour = KAPColour_3;
+        }
+        
+        const float cornerSize = 6.0f;
+        const Rectangle<float> bounds = button.getLocalBounds().toFloat().reduced (0.5f, 0.5f);
+        
+        g.setColour (fillColour);
+        g.fillRoundedRectangle (bounds.reduced(1), cornerSize);
+    }
+    
+    /** COMBOBOX */
+    Font getLabelFont (Label& label) override
     {
         return font_1;
     }
@@ -58,8 +83,9 @@ public:
                             const String& shortcutKeyText,
                             const Drawable* icon, const Colour* const textColourToUse) override
     {
-        Colour fillColour = isHighlighted ? KAPColour_6 : KAPColour_4;
         juce::Rectangle<int> r (area);
+        
+        Colour fillColour = isHighlighted ? KAPColour_6 : KAPColour_4;
         g.setColour(fillColour);
         g.fillRect(r.getX(), r.getY(), r.getWidth(), r.getHeight()-1);
         
@@ -90,29 +116,7 @@ public:
         g.strokePath (path, PathStrokeType (2.0f));
     }
     
-    void drawButtonBackground (Graphics& g,
-                               Button& button,
-                               const Colour& backgroundColour,
-                               bool isMouseOverButton,
-                               bool isButtonDown) override
-    {
-        Colour fillColour;
-        
-        if(isButtonDown){
-            fillColour = KAPColour_5;
-        } else if(isMouseOverButton){
-            fillColour = KAPColour_4;
-        } else {
-            fillColour = KAPColour_3;
-        }
-        
-        const auto cornerSize = 6.0f;
-        const auto bounds = button.getLocalBounds().toFloat().reduced (0.5f, 0.5f);
-        
-        g.setColour (fillColour);
-        g.fillRoundedRectangle (bounds.reduced(1), cornerSize);
-    }
-    
+    /** SLIDER */
     void drawRotarySlider (Graphics& g, int x, int y, int width, int height, float sliderPos,
                            const float rotaryStartAngle, const float rotaryEndAngle, Slider& slider) override
     {

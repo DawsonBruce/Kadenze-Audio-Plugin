@@ -32,8 +32,9 @@ public:
 
 private:
     
-    ScopedPointer<KAPLookAndFeel> mLookAndFeel;
+    Image mBackground;
     
+    ScopedPointer<KAPLookAndFeel> mLookAndFeel;
     ScopedPointer<KAPMainPanel> mMainPanel;
     ScopedPointer<KAPParameterSlider> mParameterSlider[kParameter_TotalNumParameters];
     ScopedPointer<Label> mLabel[kParameter_TotalNumParameters];
