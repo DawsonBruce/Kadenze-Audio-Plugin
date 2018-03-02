@@ -72,7 +72,9 @@ public:
     KAPPresetManager* getPresetManager();
 
     // Our parameters
-    AudioParameterFloat* parameters[kParameter_TotalNumParameters];
+//    AudioParameterFloat* parameters[kParameter_TotalNumParameters];
+    
+    AudioProcessorValueTreeState parameters;
     
 private:
     

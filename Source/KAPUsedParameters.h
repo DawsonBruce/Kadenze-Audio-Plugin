@@ -12,17 +12,24 @@
 
 enum {
     kParameter_InputGain = 0,
-    
     kParameter_ModulationRate,
     kParameter_ModulationDepth,
-    
     kParameter_DelayTime,
     kParameter_DelayFeedback,
     kParameter_DelayWetDry,
-    
     kParameter_DelayType,
-    
     kParameter_OutputGain,
-    
     kParameter_TotalNumParameters
+};
+
+static String KAPParameterID [kParameter_TotalNumParameters] =
+{
+    "InputGain",
+    "ModulationRate",
+    "ModulationDepth",
+    "DelayTime",
+    "DelayFeedback",
+    "DelayWetDry",
+    "DelayType",
+    "OutputGain"
 };
