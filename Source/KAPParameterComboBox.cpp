@@ -10,24 +10,15 @@
 
 #include "KAPParameterComboBox.h"
 
-KAPParameterComboBox::KAPParameterComboBox(AudioProcessorParameter* p)
-:   mParameter(p)
+KAPParameterComboBox::KAPParameterComboBox(AudioProcessorValueTreeState& stateToControl,
+                                           const String& parameterID)
+:   ComboBox(parameterID)
 {
-    updateValue();
-    addListener(this);
+    mAttachment =
+    new AudioProcessorValueTreeState::ComboBoxAttachment(stateToControl, parameterID, *this);
 }
 
 KAPParameterComboBox::~KAPParameterComboBox()
 {
-    
 }
 
-void KAPParameterComboBox::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
-{
-    mParameter->setValueNotifyingHost((float)ComboBox::getSelectedItemIndex());
-}
-
-void KAPParameterComboBox::updateValue()
-{
-    setSelectedItemIndex((int)mParameter->getValue(), dontSendNotification);
-}
