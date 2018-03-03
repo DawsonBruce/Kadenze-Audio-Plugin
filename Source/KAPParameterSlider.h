@@ -17,25 +17,12 @@ class KAPParameterSlider
 {
 public:
     
-    KAPParameterSlider(AudioProcessorParameter* p);
+    KAPParameterSlider(AudioProcessorValueTreeState& stateToControl,
+                       const String& parameterID);
     ~KAPParameterSlider();
-    
-    /** component override */
-    void mouseDoubleClick (const MouseEvent&) override;
-    /** slider override */
-    void valueChanged() override;
-    /** slider override */
-    void startedDragging() override;
-    /** slider override */
-    void stoppedDragging() override;
-    
-    /** function for updating slider 
-        position based on parameter value. 
-     */
-    void updateValue();
     
 private:
     
-    AudioProcessorParameter* mParameter;
+    ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> mAttachment;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KAPParameterSlider)
 };

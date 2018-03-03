@@ -21,10 +21,11 @@ public:
     KAPCenterPanelMenuBar(KadenzeAudioPluginAudioProcessor* processor);
     ~KAPCenterPanelMenuBar();
     
-private:
+    void addFxTypeComboBoxListener(ComboBox::Listener* inListener);
     
-    /** override as needed in derived panels. */
-    void changeListenerCallback (ChangeBroadcaster* source) override;
+    void removeFxTypeComboBoxListener(ComboBox::Listener* inListener);
+    
+private:
     
     ScopedPointer<KAPParameterComboBox> mFxType;
 };

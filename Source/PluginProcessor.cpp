@@ -22,7 +22,8 @@ KadenzeAudioPluginAudioProcessor::KadenzeAudioPluginAudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+    parameters(*this, nullptr)
 #endif
 {
     /** initialize our dsp */
@@ -243,20 +244,6 @@ void KadenzeAudioPluginAudioProcessor::setStateInformation (const void* data, in
     }
 }
 
-void KadenzeAudioPluginAudioProcessor::setParameter (int parameterIndex, float newValue)
-{
-    DBG("parameter : " << parameterIndex);
-    DBG("value : " << newValue);
-    
-    
-    std::function<void(void)> changeMessageLambda = [this](){
-        this->sendChangeMessage();
-    };
-    
-    AudioProcessor::setParameter(parameterIndex, newValue);
-    MessageManager::getInstance()->callAsync(changeMessageLambda);
-}
-
 float KadenzeAudioPluginAudioProcessor::getInputGainMeterLevel(int inChannel)
 {
     return mInputGain[inChannel]->getMeterLevel();
@@ -284,30 +271,18 @@ void KadenzeAudioPluginAudioProcessor::initializeDSP()
 
 void KadenzeAudioPluginAudioProcessor::initializeParameters()
 {
-    /** add our parameters to processor */
-    addParameter (parameters[kParameter_InputGain]
-                  = new AudioParameterFloat ("inputgain",  "InputGain", 0.0f, 1.0f, 0.5f));
+    /** add our parameters to processor */    
+    for(int i = 0; i < kParameter_TotalNumParameters; i++){
+        parameters.createAndAddParameter(KAPParameterID[i],
+                                         KAPParameterID[i],
+                                         KAPParameterID[i],
+                                         NormalisableRange<float> (0.0f, 1.0f),
+                                         KAPParameterDefaultValue[i],
+                                         nullptr,
+                                         nullptr);
+    }
     
-    addParameter (parameters[kParameter_ModulationRate]
-                  = new AudioParameterFloat ("rate", "Rate", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_ModulationDepth]
-                  = new AudioParameterFloat ("depth",  "Depth", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_DelayTime]
-                  = new AudioParameterFloat ("time", "Time", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_DelayFeedback]
-                  = new AudioParameterFloat ("feedback", "Feedback", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_DelayWetDry]
-                  = new AudioParameterFloat ("wetdry",  "WetDry", 0.0f, 1.0f, 0.5f));
-    
-    addParameter (parameters[kParameter_DelayType]
-                  = new AudioParameterFloat ("type",  "Type", 0.0f, 1.0f, 0.0f));
-    
-    addParameter (parameters[kParameter_OutputGain]
-                  = new AudioParameterFloat ("outputgain",  "OutputGain", 0.0f, 1.0f, 0.5f));
+    parameters.state = ValueTree (Identifier ("KAP"));
 }
 
 //==============================================================================

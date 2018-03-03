@@ -13,22 +13,14 @@
 #include "JuceHeader.h"
 
 class KAPParameterComboBox
-:   public ComboBox,
-    public ComboBox::Listener
+:   public ComboBox
 {
 public:
-    KAPParameterComboBox(AudioProcessorParameter* p);
+    KAPParameterComboBox(AudioProcessorValueTreeState& stateToControl,
+                         const String& parameterID);
     ~KAPParameterComboBox();
-    
-    /** function for updating slider
-     position based on parameter value.
-     */
-    void updateValue();
     
 private:
     
-    /** listener override */
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
-    
-    AudioProcessorParameter* mParameter;
+    ScopedPointer<AudioProcessorValueTreeState::ComboBoxAttachment> mAttachment;
 };

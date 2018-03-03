@@ -9,7 +9,7 @@
 */
 
 #include "KAPPresetManager.h"
-
+#include "KAPUsedParameters.h"
 
 KAPPresetManager::KAPPresetManager(AudioProcessor* inProcessor)
 :   mCurrentPresetIsSaved(false),
@@ -40,7 +40,8 @@ void KAPPresetManager::getXmlForPreset(XmlElement* inElement)
     const int numParameters = mProcessor->getNumParameters();
     
     for(int i = 0; i < numParameters; i ++){
-        inElement->setAttribute(mProcessor->getParameterName(i), mProcessor->getParameter(i));
+        inElement->setAttribute(mProcessor->getParameterName(i),
+                                mProcessor->getParameter(i));
     }
 }
 
@@ -56,7 +57,7 @@ void KAPPresetManager::loadPresetForXml(XmlElement* inElement)
         /** iterate our parameter list for name. */
         for(int j = 0; j < mProcessor->getNumParameters(); j++){
             if(mProcessor->getParameterName(j) == name){
-                mProcessor->setParameter(j, value);
+                mProcessor->setParameterNotifyingHost(j, value);
                 break;
             }
         }
@@ -78,8 +79,7 @@ void KAPPresetManager::createNewPreset()
     /** first, update connected parameters */
     const int numParameters = mProcessor->getNumParameters();
     for(int i = 0; i < numParameters; i ++){
-        mProcessor->setParameter(i,
-                                 mProcessor->getParameterDefaultValue(i));
+        mProcessor->setParameterNotifyingHost(i, mProcessor->getParameterDefaultValue(i));
     }
     
     /** update our bool */
@@ -99,7 +99,6 @@ void KAPPresetManager::savePreset()
     mCurrentlyLoadedPreset.appendData(destinationData.getData(), destinationData.getSize());
     
     mCurrentPresetIsSaved = true;
-    sendChangeMessageLambda();
 }
 
 void KAPPresetManager::saveAsPreset(String inPresetName)
@@ -121,7 +120,6 @@ void KAPPresetManager::saveAsPreset(String inPresetName)
     mCurrentPresetName = inPresetName;
     
     storeLocalPresets();
-    sendChangeMessageLambda();
 }
 
 void KAPPresetManager::loadPreset(int inPresetIndex)
@@ -133,7 +131,6 @@ void KAPPresetManager::loadPreset(int inPresetIndex)
         mCurrentPresetIsSaved = true;
         mCurrentPresetName = getPresetName(inPresetIndex);
         mProcessor->setStateInformation(presetBinary.getData(), (int)presetBinary.getSize());
-        sendChangeMessageLambda();
     }
 }
 
@@ -145,15 +142,6 @@ bool KAPPresetManager::getIsCurrentPresetSaved()
 String KAPPresetManager::getCurrentPresetName()
 {
     return mCurrentPresetName;
-}
-
-void KAPPresetManager::sendChangeMessageLambda()
-{
-    std::function<void(void)> changeMessageLambda = [this](){
-        this->sendChangeMessage();
-    };
-    
-    MessageManager::getInstance()->callAsync(changeMessageLambda);
 }
 
 void KAPPresetManager::storeLocalPresets()

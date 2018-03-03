@@ -69,30 +69,3 @@ inline double kap_cubic_interpolation( double y0, double y1, double y2, double y
     
     //CHECK OUT OTHER OPEN SOURCE INTERPOLATIONS THAT ARE EASILY ACCESSIBLE
 }
-
-/** function for returning a time signature based on an unmapped 0.f - 1.f value.
- 
-@param      inUnmappedValue     the unmapped 0.f - 1.f value we'd like to return a time signature for.
- */
-
-inline float kap_time_signature(float inUnmappedValue)
-{
-    if(inUnmappedValue<1.0f/18.0f)       return 1.0f/24.0f;//1/64T
-    else if(inUnmappedValue<2.0f/18.0f)  return 1.0f/16.0f; //1/64
-    else if(inUnmappedValue<3.0f/18.0f)  return 1.0f/12.0f; //1/32T
-    else if(inUnmappedValue<4.0f/18.0f)  return 1.0f/16.0f+1.0f/16.0f*0.5f; //1/64D
-    else if(inUnmappedValue<5.0f/18.0f)  return 1.0f/8.0f; //1/32
-    else if(inUnmappedValue<6.0f/18.0f)  return 1.0f/6.0f; //1/16T
-    else if(inUnmappedValue<7.0f/18.0f)  return 1.0f/8.0+1.0f/8.0*0.5f; //1/32D
-    else if(inUnmappedValue<8.0f/18.0f)  return 1.0f/4.0f; //1/16
-    else if(inUnmappedValue<9.0f/18.0f)  return 1.0f/3.0f; //1/8T
-    else if(inUnmappedValue<10.0f/18.0f) return 1.0f/4.0f+1.0f/4.0f*0.5f; //1/16D
-    else if(inUnmappedValue<11.0f/18.0f) return 1.0f/2.0f; //1/8
-    else if(inUnmappedValue<12.0f/18.0f) return 2.0f/3.0f; //1/4T
-    else if(inUnmappedValue<13.0f/18.0f) return 1.0f/2.0f+1.0f/2.0f*0.5f; //1/8D
-    else if(inUnmappedValue<14.0f/18.0f) return 1.0f/1.0f; //1/4
-    else if(inUnmappedValue<15.0f/18.0f) return 4.0f/3.0f; //1/2T
-    else if(inUnmappedValue<16.0f/18.0f) return 1.0f/1.0f+1.0f/1.0f*0.5f; //1/4D
-    else if(inUnmappedValue<17.0f/18.0f) return 2.0f/1.0f; //1/2
-    else return 2.0f/1.0f+2.0f/1.0f*0.5f; //1/2D
-}

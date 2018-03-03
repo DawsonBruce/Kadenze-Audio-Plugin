@@ -16,7 +16,8 @@
 #include "KAPFxPanel.h"
 
 class KAPCenterPanel
-:   public KAPPanelBase
+:   public KAPPanelBase,
+    public ComboBox::Listener
 {
 public:
     KAPCenterPanel(KadenzeAudioPluginAudioProcessor* processor);
@@ -27,7 +28,7 @@ private:
     /** internal */
     void showPanel(int inPanelID);
     
-    void changeListenerCallback (ChangeBroadcaster* source) override;
+    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
     
     ScopedPointer<KAPCenterPanelMenuBar> mMenuBar;
     ScopedPointer<KAPFxPanel> mDelayPanel;

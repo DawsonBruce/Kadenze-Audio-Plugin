@@ -15,7 +15,6 @@
 #define PRESET_FILE_EXTENTION ".kpf"
 
 class KAPPresetManager
-:   public ChangeBroadcaster
 {
 public:
     
@@ -54,9 +53,6 @@ public:
     String getCurrentPresetName();
     
 private:
-    
-    /** internal */
-    void sendChangeMessageLambda();
     
     /** internal function for updating the preset managers internal list of associated presets. This can be called on initialization, or after a new preset has been added via preset manager. */
     void storeLocalPresets();

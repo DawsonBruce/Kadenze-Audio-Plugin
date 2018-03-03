@@ -32,8 +32,6 @@ public:
     void setFxPanelStyle(KAPFxPanelStyle inStyle);
 private:
     
-    void changeListenerCallback (ChangeBroadcaster* source) override;
-    
     OwnedArray<KAPParameterSlider> mSliders;
     
     String mLabel;

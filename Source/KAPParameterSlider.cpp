@@ -10,44 +10,19 @@
 
 #include "KAPParameterSlider.h"
 
-KAPParameterSlider::KAPParameterSlider(AudioProcessorParameter* p)
-:   juce::Slider(p->getName(256)),
-    mParameter(p)
+KAPParameterSlider::KAPParameterSlider(AudioProcessorValueTreeState& stateToControl,
+                                       const String& parameterID)
+:   juce::Slider(parameterID)
 {
     setSliderStyle(SliderStyle::RotaryHorizontalVerticalDrag);
     setTextBoxStyle(Slider::TextEntryBoxPosition::TextBoxBelow, false, 0, 0);
     setRange(0.f, 1.f, 0.001f);
-    updateValue();
     
+    mAttachment =
+    new AudioProcessorValueTreeState::SliderAttachment(stateToControl, parameterID, *this);
 }
 
 KAPParameterSlider::~KAPParameterSlider()
 {
-    
 }
 
-void KAPParameterSlider::mouseDoubleClick (const MouseEvent& e)
-{
-    /** on double click, update slider to default value and notify host. */
-    setValue(mParameter->getDefaultValue(), sendNotification);
-}
-
-void KAPParameterSlider::valueChanged()
-{
-    mParameter->setValueNotifyingHost((float)Slider::getValue());
-}
-
-void KAPParameterSlider::startedDragging()
-{
-    mParameter->beginChangeGesture();
-}
-
-void KAPParameterSlider::stoppedDragging()
-{
-    mParameter->endChangeGesture();
-}
-
-void KAPParameterSlider::updateValue()
-{
-    setValue(mParameter->getValue(), dontSendNotification);
-}

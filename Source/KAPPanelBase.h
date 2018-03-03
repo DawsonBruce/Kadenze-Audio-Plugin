@@ -16,8 +16,7 @@
 #include "KAPHelperFunctions.h"
 
 class KAPPanelBase
-:   public Component,
-    public ChangeListener
+:   public Component
 {
 public:
     KAPPanelBase(KadenzeAudioPluginAudioProcessor* processor);
@@ -26,9 +25,6 @@ public:
     void paint(Graphics& g) override;
     
 protected:
-    
-    /** override as needed in derived panels. */
-    void changeListenerCallback (ChangeBroadcaster* source) override {};
     
     KadenzeAudioPluginAudioProcessor* mProcessor;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(KAPPanelBase);

@@ -39,21 +39,17 @@ void KAPDelay::reset()
 void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inWetDry, float inType,
                        float* inModulationBuffer, float* outAudio, int inNumSamplesToRender)
 {
-    const float time = kap_time_signature(inTime);
     const float wet = inWetDry;
     const float dry = 1.f - wet;
     const float feedbackMapped = (inType==kKAPDelayType_Delay) ? jmap(inFeedback, 0.f, 1.f, 0.f, 0.95f) : 0.f;
         
     for(int i = 0; i < inNumSamplesToRender; i++){
-        
-        
-        if(inType == kKAPDelayType_Delay){
-            
-            mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-time);
-        } else if(inType == kKAPDelayType_Chorus){
-            
+    
+       if((int)inType == kKAPDelayType_Chorus){
             const double delayTimeModulation = (0.003 + 0.002 * inModulationBuffer[i]);
             mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-delayTimeModulation);
+        } else {
+           mTimeSmoothed = mTimeSmoothed - kKAPParamSmoothCoeff_Fine*(mTimeSmoothed-inTime);
         }
         
         const double delayTimeInSamples = (mSampleRate * mTimeSmoothed);
