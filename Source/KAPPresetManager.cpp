@@ -99,7 +99,6 @@ void KAPPresetManager::savePreset()
     mCurrentlyLoadedPreset.appendData(destinationData.getData(), destinationData.getSize());
     
     mCurrentPresetIsSaved = true;
-    sendChangeMessageLambda();
 }
 
 void KAPPresetManager::saveAsPreset(String inPresetName)
@@ -121,7 +120,6 @@ void KAPPresetManager::saveAsPreset(String inPresetName)
     mCurrentPresetName = inPresetName;
     
     storeLocalPresets();
-    sendChangeMessageLambda();
 }
 
 void KAPPresetManager::loadPreset(int inPresetIndex)
@@ -133,7 +131,6 @@ void KAPPresetManager::loadPreset(int inPresetIndex)
         mCurrentPresetIsSaved = true;
         mCurrentPresetName = getPresetName(inPresetIndex);
         mProcessor->setStateInformation(presetBinary.getData(), (int)presetBinary.getSize());
-        sendChangeMessageLambda();
     }
 }
 
@@ -145,15 +142,6 @@ bool KAPPresetManager::getIsCurrentPresetSaved()
 String KAPPresetManager::getCurrentPresetName()
 {
     return mCurrentPresetName;
-}
-
-void KAPPresetManager::sendChangeMessageLambda()
-{
-    std::function<void(void)> changeMessageLambda = [this](){
-        this->sendChangeMessage();
-    };
-    
-    MessageManager::getInstance()->callAsync(changeMessageLambda);
 }
 
 void KAPPresetManager::storeLocalPresets()

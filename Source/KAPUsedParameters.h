@@ -33,3 +33,15 @@ static String KAPParameterID [kParameter_TotalNumParameters] =
     "DelayType",
     "OutputGain"
 };
+
+static float KAPParameterDefaultValue [kParameter_TotalNumParameters] =
+{
+    0.5f,
+    0.2f,
+    1.0f,
+    0.2f,
+    0.5f,
+    0.25f,
+    0.0f,
+    0.5f
+};

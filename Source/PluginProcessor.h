@@ -23,7 +23,7 @@
 //==============================================================================
 /**
 */
-class KadenzeAudioPluginAudioProcessor  : public AudioProcessor, public ChangeBroadcaster
+class KadenzeAudioPluginAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
@@ -63,17 +63,13 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
-    void setParameter (int parameterIndex, float newValue) override;
-    
     float getInputGainMeterLevel(int inChannel);
     
     float getOutputGainMeterLevel(int inChannel);
     
     KAPPresetManager* getPresetManager();
 
-    // Our parameters
-//    AudioParameterFloat* parameters[kParameter_TotalNumParameters];
-    
+    // Our parameters    
     AudioProcessorValueTreeState parameters;
     
 private:

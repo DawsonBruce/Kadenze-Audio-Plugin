@@ -49,15 +49,7 @@ KAPTopPanel::KAPTopPanel(KadenzeAudioPluginAudioProcessor* processor)
     mPresetDisplay->addListener(this);
     addAndMakeVisible(mPresetDisplay);
     
-    KAPPresetManager* presetManager = mProcessor->getPresetManager();
-    const int numPresets = presetManager->getNumberOfPresets();
-    
-    for(int i = 0; i < numPresets; i++){
-        mPresetDisplay->addItem(presetManager->getPresetName(i), (i+1));
-    }
-    
-    String presetName = presetManager->getCurrentPresetName();
-    mPresetDisplay->setText(presetName, dontSendNotification);
+    updatePresetComboBox();
 }
 
 KAPTopPanel::~KAPTopPanel()
@@ -130,9 +122,11 @@ void KAPTopPanel::buttonClicked(Button* b)
         
         displaySaveAsPopup();
     }
+    
+    updatePresetComboBox();
 }
 
-void KAPTopPanel::changeListenerCallback (ChangeBroadcaster* source)
+void KAPTopPanel::updatePresetComboBox()
 {
     KAPPresetManager* presetManager = mProcessor->getPresetManager();
     String presetName = presetManager->getCurrentPresetName();

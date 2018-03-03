@@ -34,7 +34,8 @@ private:
     /** button::listener override */
     void buttonClicked(Button* b) override;
     
-    void changeListenerCallback (ChangeBroadcaster* source) override;
+    /** internal */
+    void updatePresetComboBox();
     
     ScopedPointer<ComboBox> mPresetDisplay;
     

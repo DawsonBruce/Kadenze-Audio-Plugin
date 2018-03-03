@@ -18,6 +18,7 @@ KAPCenterPanel::KAPCenterPanel(KadenzeAudioPluginAudioProcessor* processor)
     
     mMenuBar = new KAPCenterPanelMenuBar(processor);
     mMenuBar->setTopLeftPosition(0, 0);
+    mMenuBar->addFxTypeComboBoxListener(this);
     addAndMakeVisible(mMenuBar);
     
     mDelayPanel = new KAPFxPanel(processor);
@@ -36,7 +37,7 @@ KAPCenterPanel::KAPCenterPanel(KadenzeAudioPluginAudioProcessor* processor)
 
 KAPCenterPanel::~KAPCenterPanel()
 {
-    
+    mMenuBar->removeFxTypeComboBoxListener(this);
 }
 
 void KAPCenterPanel::showPanel(int inPanelID)
@@ -58,8 +59,7 @@ void KAPCenterPanel::showPanel(int inPanelID)
     }
 }
 
-void KAPCenterPanel::changeListenerCallback (ChangeBroadcaster* source)
+void KAPCenterPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 {
-    const int panelToShow = mProcessor->getParameter(kParameter_DelayType);
-    showPanel(panelToShow);
+    showPanel(comboBoxThatHasChanged->getSelectedItemIndex());
 }
