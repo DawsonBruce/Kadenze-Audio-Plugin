@@ -90,23 +90,11 @@ double KAPDelay::getInterpolatedSample(float inDelayTimeInSamples)
         index_y1 = index_y1 - kMaxChannelBufferSize;
     }
     
-    int index_y2 = index_y1 + 1;
-    if(index_y2 >= kMaxChannelBufferSize){
-        index_y2 = index_y2 - kMaxChannelBufferSize;
-    }
-    
-    int index_y3 = index_y2 + 1;
-    if(index_y3 >= kMaxChannelBufferSize){
-        index_y3 = index_y3 - kMaxChannelBufferSize;
-    }
-    
     const float sample_y0 = mBuffer[index_y0];
     const float sample_y1 = mBuffer[index_y1];
-    const float sample_y2 = mBuffer[index_y2];
-    const float sample_y3 = mBuffer[index_y3];
     const double mu = readPosition - (int)readPosition;
-    
-    double outSample = kap_cubic_interpolation(sample_y0, sample_y1, sample_y2, sample_y3, mu);
+        
+    float outSample = kap_linear_interp(sample_y0, sample_y1, mu);
     
     return outSample;
 }

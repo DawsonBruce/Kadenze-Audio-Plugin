@@ -69,3 +69,11 @@ inline double kap_cubic_interpolation( double y0, double y1, double y2, double y
     
     //CHECK OUT OTHER OPEN SOURCE INTERPOLATIONS THAT ARE EASILY ACCESSIBLE
 }
+
+/** linear interpolation algorithm found on wikipedia.
+    url: https://en.wikipedia.org/wiki/Linear_interpolation
+*/
+inline float kap_linear_interp (float v0, float v1, float t)
+{
+    return (1 - t) * v0 + t * v1;
+}
