@@ -17,7 +17,6 @@ KAPLfo::KAPLfo()
 
 KAPLfo::~KAPLfo()
 {
-    
 }
 
 void KAPLfo::setSampleRate(double inSampleRate)
@@ -29,11 +28,11 @@ void KAPLfo::setSampleRate(double inSampleRate)
 void KAPLfo::reset()
 {
     mPhase = 0.0;
+    zeromem(mBuffer, kMaxChannelBufferSize * sizeof(float));
 }
 
 void KAPLfo::process(float inRate,
                      float inDepth,
-                     float* outAudio,
                      int inNumSamplesToRender)
 {
     
@@ -49,6 +48,6 @@ void KAPLfo::process(float inRate,
         }
         
         const float lfoPosition = sinf(mPhase * kPI2) * inDepth;
-        outAudio[i] = lfoPosition;
+        mBuffer[i] = lfoPosition;
     }
 }

@@ -26,12 +26,15 @@ public:
     
     void process(float inRate,
                  float inDepth,
-                 float* outAudio,
                  int inNumSamplesToRender);
+    
+    float* getBuffer(){ return mBuffer; };
     
 private:
     
     /** sine variables */    
     float mPhase;
     double mSampleRate;
+    
+    float mBuffer[kMaxChannelBufferSize];
 };

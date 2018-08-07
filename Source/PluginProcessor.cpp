@@ -171,12 +171,10 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                                      numSamplesToRender);
         
         /** process lfo */
-        float lfoBuffer [numSamplesToRender];
         float rate = channel==0 ? 0: getParameter(kParameter_ModulationRate);
 
         mLfo[channel]->process(rate,
                                getParameter(kParameter_ModulationDepth),
-                               lfoBuffer,
                                numSamplesToRender);
         
         /** process delay. */
@@ -185,7 +183,7 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                         getParameter(kParameter_DelayFeedback),
                         getParameter(kParameter_DelayWetDry),
                         getParameter(kParameter_DelayType),
-                        lfoBuffer,
+                        mLfo[channel]->getBuffer(),
                         channelData,
                         numSamplesToRender);
         
@@ -195,7 +193,6 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                                      channelData,
                                      numSamplesToRender);
     }
-    
 }
 
 //==============================================================================
@@ -230,7 +227,6 @@ void KadenzeAudioPluginAudioProcessor::setStateInformation (const void* data, in
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-    DBG("KadenzeAudioPluginAudioProcessor::setStateInformation");
     
     XmlElement* xmlState = getXmlFromBinary(data, sizeInBytes);
     
@@ -239,8 +235,7 @@ void KadenzeAudioPluginAudioProcessor::setStateInformation (const void* data, in
             mPresetManager->loadPresetForXml(subchild);
         }
     } else {
-        
-        DBG("KadenzeAudioPluginAudioProcessor::setStateInformation XML NULL");
+        jassertfalse;
     }
 }
 
