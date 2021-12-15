@@ -22,5 +22,5 @@ public:
     
 private:
     
-    ScopedPointer<AudioProcessorValueTreeState::ComboBoxAttachment> mAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::ComboBoxAttachment> mAttachment;
 };

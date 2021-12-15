@@ -15,23 +15,19 @@
 
 //==============================================================================
 KadenzeAudioPluginAudioProcessorEditor::KadenzeAudioPluginAudioProcessorEditor (KadenzeAudioPluginAudioProcessor& p)
-    : AudioProcessorEditor (&p), processor (p)
+    : AudioProcessorEditor (&p)
+    , mBackground (ImageCache::getFromMemory(BinaryData::kadenze_bg_png,
+                                             BinaryData::kadenze_bg_pngSize))
+    , processor (p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (MAIN_PANEL_WIDTH,
              MAIN_PANEL_HEIGHT);
     
-    mMainPanel = new KAPMainPanel(&processor);
+    mMainPanel = std::make_unique<KAPMainPanel>(&processor);
     mMainPanel->setTopLeftPosition(0, 0);
-    addAndMakeVisible(mMainPanel);
-    
-    mLookAndFeel = new KAPLookAndFeel();
-    setLookAndFeel(mLookAndFeel);
-    LookAndFeel::setDefaultLookAndFeel(mLookAndFeel);
-    
-    mBackground = ImageCache::getFromMemory(BinaryData::kadenze_bg_png,
-                                            BinaryData::kadenze_bg_pngSize);
+    addAndMakeVisible(mMainPanel.get());
 }
 
 KadenzeAudioPluginAudioProcessorEditor::~KadenzeAudioPluginAudioProcessorEditor()

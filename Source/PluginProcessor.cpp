@@ -11,6 +11,20 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
+{
+    std::vector<std::unique_ptr<AudioParameterFloat>> params;
+    
+    for(int i = 0; i < kParameter_TotalNumParameters; i++){
+        
+        params.push_back(std::make_unique<AudioParameterFloat>(KAPParameterID[i],
+                                                               KAPParameterLabel[i],
+                                                               NormalisableRange<float> (0.0f, 1.0f),
+                                                               KAPParameterDefaultValue[i]));
+    }
+    
+    return { params.begin(), params.end() };
+}
 
 //==============================================================================
 KadenzeAudioPluginAudioProcessor::KadenzeAudioPluginAudioProcessor()
@@ -23,16 +37,24 @@ KadenzeAudioPluginAudioProcessor::KadenzeAudioPluginAudioProcessor()
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
                        ),
-    parameters(*this, nullptr)
+    parameters(*this /** reference to processor */,
+               nullptr /** null pointer to undoManager (optional) */,
+               juce::Identifier("KAP") /** valueTree identifier */,
+               createParameterLayout() /** initialize parameters */)
 #endif
 {
     /** initialize our dsp */
     initializeDSP();
     
     /** initialize our parameters */
-    initializeParameters();
+    //initializeParameters();
     
+    /** JUCE 5.1.2
     mPresetManager = new KAPPresetManager(this);
+    */
+    
+    mPresetManager =
+    std::make_unique<KAPPresetManager>(this);
 }
 
 KadenzeAudioPluginAudioProcessor::~KadenzeAudioPluginAudioProcessor()
@@ -164,20 +186,39 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
         float* channelData = buffer.getWritePointer (channel);
         const int numSamplesToRender = buffer.getNumSamples();
         
-        /** process input gain */
+        /** JUCE 5.1.2
         mInputGain[channel]->process(channelData,
                                      getParameter(kParameter_InputGain),
                                      channelData,
                                      numSamplesToRender);
+        */
         
-        /** process lfo */
+        /** process input gain */
+        mInputGain[channel]->process(channelData,
+                                     *parameters.getRawParameterValue(KAPParameterID[kParameter_InputGain]),
+                                     channelData,
+                                     numSamplesToRender);
+        
+        /** JUCE 5.1.2
         float rate = channel==0 ? 0: getParameter(kParameter_ModulationRate);
-
+        
         mLfo[channel]->process(rate,
                                getParameter(kParameter_ModulationDepth),
                                numSamplesToRender);
+        */
         
-        /** process delay. */
+        /** process lfo */
+        float rate = 0;
+        
+        if(channel==1){
+            rate = *parameters.getRawParameterValue(KAPParameterID[kParameter_ModulationRate]);
+        }
+        
+        mLfo[channel]->process(rate,
+                               *parameters.getRawParameterValue(KAPParameterID[kParameter_ModulationDepth]),
+                               numSamplesToRender);
+        
+        /** JUCE 5.1.2
         mDelay[channel]->process(channelData,
                         getParameter(kParameter_DelayTime),
                         getParameter(kParameter_DelayFeedback),
@@ -186,12 +227,30 @@ void KadenzeAudioPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                         mLfo[channel]->getBuffer(),
                         channelData,
                         numSamplesToRender);
+        */
         
-        /** process output gain */
+        /** process delay. */
+        mDelay[channel]->process(channelData,
+                                 *parameters.getRawParameterValue(KAPParameterID[kParameter_DelayTime]),
+                                 *parameters.getRawParameterValue(KAPParameterID[kParameter_DelayFeedback]),
+                                 *parameters.getRawParameterValue(KAPParameterID[kParameter_DelayWetDry]),
+                                 *parameters.getRawParameterValue(KAPParameterID[kParameter_DelayType]),
+                                 mLfo[channel]->getBuffer(),
+                                 channelData,
+                                 numSamplesToRender);
+        
+        /** JUCE 5.1.2
         mOutputGain[channel]->process(channelData,
                                      getParameter(kParameter_OutputGain),
                                      channelData,
                                      numSamplesToRender);
+        */
+        
+        /** process output gain */
+        mOutputGain[channel]->process(channelData,
+                                      *parameters.getRawParameterValue(KAPParameterID[kParameter_OutputGain]),
+                                      channelData,
+                                      numSamplesToRender);
     }
 }
 
@@ -228,14 +287,12 @@ void KadenzeAudioPluginAudioProcessor::setStateInformation (const void* data, in
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
     
-    XmlElement* xmlState = getXmlFromBinary(data, sizeInBytes);
+    const auto xmlState = getXmlFromBinary(data, sizeInBytes);
     
-    if(xmlState != nullptr){
-        forEachXmlChildElement(*xmlState, subchild){
-            mPresetManager->loadPresetForXml(subchild);
-        }
-    } else {
-        jassertfalse;
+    jassert (xmlState.get() != nullptr);
+    
+    for(auto* subchild : xmlState->getChildIterator()){
+        mPresetManager->loadPresetForXml(subchild);
     }
 }
 
@@ -251,33 +308,33 @@ float KadenzeAudioPluginAudioProcessor::getOutputGainMeterLevel(int inChannel)
 
 KAPPresetManager* KadenzeAudioPluginAudioProcessor::getPresetManager()
 {
-    return mPresetManager;
+    return mPresetManager.get();
 }
 
 void KadenzeAudioPluginAudioProcessor::initializeDSP()
 {
     for(int i = 0; i < getTotalNumInputChannels(); i++){
-        mLfo[i] = new KAPLfo();
-        mDelay[i] = new KAPDelay();
-        mInputGain[i] = new KAPGain();
-        mOutputGain[i] = new KAPGain();
+        mLfo[i] = std::make_unique<KAPLfo>();
+        mDelay[i] = std::make_unique<KAPDelay>();
+        mInputGain[i] = std::make_unique<KAPGain>();
+        mOutputGain[i] = std::make_unique<KAPGain>();
     }
 }
 
 void KadenzeAudioPluginAudioProcessor::initializeParameters()
 {
-    /** add our parameters to processor */    
-    for(int i = 0; i < kParameter_TotalNumParameters; i++){
-        parameters.createAndAddParameter(KAPParameterID[i],
-                                         KAPParameterID[i],
-                                         KAPParameterID[i],
-                                         NormalisableRange<float> (0.0f, 1.0f),
-                                         KAPParameterDefaultValue[i],
-                                         nullptr,
-                                         nullptr);
-    }
-    
-    parameters.state = ValueTree (Identifier ("KAP"));
+//    /** add our parameters to processor */
+//    for(int i = 0; i < kParameter_TotalNumParameters; i++){
+//        parameters.createAndAddParameter(KAPParameterID[i],
+//                                         KAPParameterID[i],
+//                                         KAPParameterLabel[i],
+//                                         NormalisableRange<float> (0.0f, 1.0f),
+//                                         KAPParameterDefaultValue[i],
+//                                         nullptr,
+//                                         nullptr);
+//    }
+//
+//    parameters.state = ValueTree (Identifier ("KAP"));
 }
 
 //==============================================================================

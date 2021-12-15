@@ -15,7 +15,8 @@ KAPParameterComboBox::KAPParameterComboBox(AudioProcessorValueTreeState& stateTo
 :   ComboBox(parameterID)
 {
     mAttachment =
-    new AudioProcessorValueTreeState::ComboBoxAttachment(stateToControl, parameterID, *this);
+    std::make_unique<AudioProcessorValueTreeState::ComboBoxAttachment>
+    (stateToControl, parameterID, *this);
 }
 
 KAPParameterComboBox::~KAPParameterComboBox()

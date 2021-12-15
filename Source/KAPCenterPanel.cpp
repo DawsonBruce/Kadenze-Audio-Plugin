@@ -16,23 +16,27 @@ KAPCenterPanel::KAPCenterPanel(KadenzeAudioPluginAudioProcessor* processor)
     setSize(CENTER_PANEL_WIDTH,
             CENTER_PANEL_HEIGHT);
     
-    mMenuBar = new KAPCenterPanelMenuBar(processor);
+    mMenuBar = std::make_unique<KAPCenterPanelMenuBar>(processor);
     mMenuBar->setTopLeftPosition(0, 0);
     mMenuBar->addFxTypeComboBoxListener(this);
-    addAndMakeVisible(mMenuBar);
+    addAndMakeVisible(mMenuBar.get());
     
-    mDelayPanel = new KAPFxPanel(processor);
+    mDelayPanel = std::make_unique<KAPFxPanel>(processor);
     mDelayPanel->setTopLeftPosition(0, CENTER_PANEL_MENU_BAR_HEIGHT);
     mDelayPanel->setFxPanelStyle(kKAPFxPanelStyle_Delay);
-    addChildComponent(mDelayPanel);
+    addChildComponent(mDelayPanel.get());
     
-    mChorusPanel = new KAPFxPanel(processor);
+    mChorusPanel = std::make_unique<KAPFxPanel>(processor);
     mChorusPanel->setTopLeftPosition(0, CENTER_PANEL_MENU_BAR_HEIGHT);
     mChorusPanel->setFxPanelStyle(kKAPFxPanelStyle_Chorus);
-    addChildComponent(mChorusPanel);
+    addChildComponent(mChorusPanel.get());
     
-    const int panelToShow = mProcessor->getParameter(kParameter_DelayType);
-    showPanel(panelToShow);
+    AudioProcessorValueTreeState& tree = mProcessor->parameters;
+    
+    const float panelToShow =
+    *tree.getRawParameterValue(KAPParameterID[kParameter_DelayType]);
+    
+    showPanel((int)panelToShow);
 }
 
 KAPCenterPanel::~KAPCenterPanel()

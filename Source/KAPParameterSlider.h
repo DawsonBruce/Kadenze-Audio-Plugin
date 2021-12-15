@@ -18,11 +18,12 @@ class KAPParameterSlider
 public:
     
     KAPParameterSlider(AudioProcessorValueTreeState& stateToControl,
-                       const String& parameterID);
+                       const String& parameterID,
+                       const String& parameterLabel);
     ~KAPParameterSlider();
     
 private:
     
-    ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> mAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> mAttachment;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KAPParameterSlider)
 };

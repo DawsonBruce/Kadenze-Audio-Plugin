@@ -16,24 +16,24 @@ KAPMainPanel::KAPMainPanel(KadenzeAudioPluginAudioProcessor* inProcessor)
     setSize(MAIN_PANEL_WIDTH,
             MAIN_PANEL_HEIGHT);
     
-    mTopPanel = new KAPTopPanel(inProcessor);
+    mTopPanel = std::make_unique<KAPTopPanel>(inProcessor);
     mTopPanel->setTopLeftPosition(0, 0);
-    addAndMakeVisible(mTopPanel);
+    addAndMakeVisible(mTopPanel.get());
     
-    mInputGainPanel = new KAPGainPanel(inProcessor);
+    mInputGainPanel = std::make_unique<KAPGainPanel>(inProcessor);
     mInputGainPanel->setTopLeftPosition(0, TOP_PANEL_HEIGHT);
     mInputGainPanel->setParameterID(kParameter_InputGain);
-    addAndMakeVisible(mInputGainPanel);
+    addAndMakeVisible(mInputGainPanel.get());
     
-    mCenterPanel = new KAPCenterPanel(inProcessor);
+    mCenterPanel = std::make_unique<KAPCenterPanel>(inProcessor);
     mCenterPanel->setTopLeftPosition(GAIN_PANEL_WIDTH, TOP_PANEL_HEIGHT);
-    addAndMakeVisible(mCenterPanel);
+    addAndMakeVisible(mCenterPanel.get());
     
-    mOutputputGainPanel = new KAPGainPanel(inProcessor);
+    mOutputputGainPanel = std::make_unique<KAPGainPanel>(inProcessor);
     mOutputputGainPanel->setTopLeftPosition(MAIN_PANEL_WIDTH - GAIN_PANEL_WIDTH,
                                             TOP_PANEL_HEIGHT);
     mOutputputGainPanel->setParameterID(kParameter_OutputGain);
-    addAndMakeVisible(mOutputputGainPanel);
+    addAndMakeVisible(mOutputputGainPanel.get());
 }
 
 KAPMainPanel::~KAPMainPanel()

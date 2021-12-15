@@ -30,7 +30,7 @@ private:
     
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
     
-    ScopedPointer<KAPCenterPanelMenuBar> mMenuBar;
-    ScopedPointer<KAPFxPanel> mDelayPanel;
-    ScopedPointer<KAPFxPanel> mChorusPanel;
+    std::unique_ptr<KAPCenterPanelMenuBar> mMenuBar;
+    std::unique_ptr<KAPFxPanel> mDelayPanel;
+    std::unique_ptr<KAPFxPanel> mChorusPanel;
 };

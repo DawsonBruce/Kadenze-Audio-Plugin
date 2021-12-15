@@ -34,6 +34,18 @@ static String KAPParameterID [kParameter_TotalNumParameters] =
     "OutputGain"
 };
 
+static String KAPParameterLabel [kParameter_TotalNumParameters] =
+{
+    "Input Gain",
+    "Modulation Rate",
+    "Modulation Depth",
+    "Delay Time",
+    "Delay Feedback",
+    "Delay WetDry",
+    "Delay Type",
+    "Output Gain"
+};
+
 static float KAPParameterDefaultValue [kParameter_TotalNumParameters] =
 {
     0.5f,

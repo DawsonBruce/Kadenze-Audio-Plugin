@@ -37,11 +37,35 @@ KAPPresetManager::~KAPPresetManager()
 
 void KAPPresetManager::getXmlForPreset(XmlElement* inElement)
 {
+    /**
+     
+     JUCE 5.1.2 Version
+     
     const int numParameters = mProcessor->getNumParameters();
     
     for(int i = 0; i < numParameters; i ++){
         inElement->setAttribute(mProcessor->getParameterName(i),
                                 mProcessor->getParameter(i));
+    }
+    
+    */
+    
+    XmlElement* presetName =
+    new XmlElement("preset_name");
+    
+    presetName->setAttribute("name", mCurrentPresetName);
+    
+    inElement->addChildElement(presetName);
+    
+    auto& parameters = mProcessor->getParameters();
+    
+    for(int i = 0; i < parameters.size(); i++){
+        
+        AudioProcessorParameterWithID* parameter =
+        (AudioProcessorParameterWithID*)parameters.getUnchecked(i);
+        
+        inElement->setAttribute(parameter->paramID,
+                                parameter->getValue());
     }
 }
 
@@ -49,16 +73,28 @@ void KAPPresetManager::loadPresetForXml(XmlElement* inElement)
 {
     mCurrentPresetXml = inElement;
     
+    XmlElement* presetName = inElement->getChildByName("preset_name");
+    
+    // early return if presetName element is nullptr
+    if(presetName == nullptr){ return; }
+    
+    mCurrentPresetName = presetName->getStringAttribute("name", "error");
+    
     /** iterate our XML for attribute name and value */
+    auto& parameters = mProcessor->getParameters();
+    
     for(int i = 0; i < mCurrentPresetXml->getNumAttributes(); i ++){
-        String name = mCurrentPresetXml->getAttributeName(i);
-        float value = mCurrentPresetXml->getDoubleAttribute(name);
+     
+        const String paramId = mCurrentPresetXml->getAttributeName(i);
+        const float value = mCurrentPresetXml->getDoubleAttribute(paramId);
         
-        /** iterate our parameter list for name. */
-        for(int j = 0; j < mProcessor->getNumParameters(); j++){
-            if(mProcessor->getParameterName(j) == name){
-                mProcessor->setParameterNotifyingHost(j, value);
-                break;
+        for(int j = 0; j < parameters.size(); j++){
+            
+            AudioProcessorParameterWithID* parameter =
+            (AudioProcessorParameterWithID*)parameters.getUnchecked(i);
+            
+            if(paramId == parameter->paramID){
+                parameter->setValueNotifyingHost(value);
             }
         }
     }
@@ -77,9 +113,25 @@ String KAPPresetManager::getPresetName(int inPresetIndex)
 void KAPPresetManager::createNewPreset()
 {
     /** first, update connected parameters */
+    
+    /** JUCE 5.1.2 version
     const int numParameters = mProcessor->getNumParameters();
     for(int i = 0; i < numParameters; i ++){
         mProcessor->setParameterNotifyingHost(i, mProcessor->getParameterDefaultValue(i));
+    }
+    */
+    
+    auto& parameters = mProcessor->getParameters();
+    
+    for(int i = 0; i < parameters.size(); i++){
+        
+        AudioProcessorParameterWithID* parameter =
+        (AudioProcessorParameterWithID*)parameters.getUnchecked(i);
+        
+        const float defaultValue =
+        parameter->getDefaultValue();
+        
+        parameter->setValueNotifyingHost(defaultValue);
     }
     
     /** update our bool */
@@ -149,12 +201,11 @@ void KAPPresetManager::storeLocalPresets()
     mLocalPresets.clear();
     
     /** iterate our preset directory and store preset files in array */
-    for (DirectoryIterator di (File(mPresetDirectory),
-                               false,
-                               "*"+(String)PRESET_FILE_EXTENTION,
-                               File::TypesOfFileToFind::findFiles); di.next();){
+    for(DirectoryEntry entry : RangedDirectoryIterator (File(mPresetDirectory),
+                                                        false, "*"+PRESET_FILE_EXTENTION,
+                                                        File::findFiles)){
         
-        const File presetFile =  di.getFile();
+        const File presetFile = entry.getFile();
         mLocalPresets.add(presetFile);
     }
 }

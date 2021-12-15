@@ -26,23 +26,24 @@ void KAPGainPanel::paint(Graphics& g)
 {
     KAPPanelBase::paint(g);
     
-    paintComponentLabel(g, mGain);
+    paintComponentLabel(g, mGain.get());
 }
 
 void KAPGainPanel::setParameterID(int inParameterID)
 {    
-    mGain = new KAPParameterSlider(mProcessor->parameters,
-                                   KAPParameterID[inParameterID]);
+    mGain = std::make_unique<KAPParameterSlider>(mProcessor->parameters,
+                                   KAPParameterID[inParameterID],
+                                   KAPParameterLabel[inParameterID]);
     const int slider_size = 54;
     mGain->setBounds(getWidth()*0.5 - slider_size*0.5,
                      slider_size*0.5,
                      slider_size,
                      slider_size);
-    addAndMakeVisible(mGain);
+    addAndMakeVisible(mGain.get());
     
     const int vu_size = 36;
-    mVuMeter = new KAPVuMeter(mProcessor);
+    mVuMeter = std::make_unique<KAPVuMeter>(mProcessor);
     mVuMeter->setParameterID(inParameterID);
     mVuMeter->setBounds(getWidth()*0.5 - vu_size*0.5, vu_size*3, vu_size, vu_size*3);
-    addAndMakeVisible(mVuMeter);
+    addAndMakeVisible(mVuMeter.get());
 }

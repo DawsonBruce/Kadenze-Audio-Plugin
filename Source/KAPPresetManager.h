@@ -12,7 +12,7 @@
 
 #include "JuceHeader.h"
 
-#define PRESET_FILE_EXTENTION ".kpf"
+static const String PRESET_FILE_EXTENTION = ".kpf";
 
 class KAPPresetManager
 {

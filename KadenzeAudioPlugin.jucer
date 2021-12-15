@@ -3,25 +3,25 @@
 <JUCERPROJECT id="pf92i2" name="KadenzeAudioPlugin" displaySplashScreen="1"
               reportAppUsage="1" splashScreenColour="Dark" projectType="audioplug"
               version="1.0.0" bundleIdentifier="com.yourcompany.KadenzeAudioPlugin"
-              includeBinaryInAppConfig="1" cppLanguageStandard="11" buildVST="1"
-              buildVST3="0" buildAU="1" buildAUv3="0" buildRTAS="0" buildAAX="0"
+              includeBinaryInAppConfig="1" cppLanguageStandard="11" buildVST="0"
+              buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0" buildAAX="0"
               buildStandalone="1" enableIAA="0" pluginName="KadenzeAudioPlugin"
               pluginDesc="KadenzeAudioPlugin" pluginManufacturer="yourcompany"
               pluginManufacturerCode="Manu" pluginCode="Pf92" pluginChannelConfigs=""
               pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
               pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0" pluginAUExportPrefix="KadenzeAudioPluginAU"
               pluginRTASCategory="" aaxIdentifier="com.yourcompany.KadenzeAudioPlugin"
-              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="5.1.2">
+              pluginAAXCategory="2" pluginFormats="buildAU,buildStandalone,buildVST3"
+              jucerFormatVersion="1">
   <MAINGROUP id="rSokST" name="KadenzeAudioPlugin">
     <GROUP id="{CD103D61-05C5-5B5F-0B6E-F2A22800253F}" name="LookAndFeel">
       <FILE id="qi7TTv" name="KAPLookAndFeel.h" compile="0" resource="0"
             file="Source/KAPLookAndFeel.h"/>
     </GROUP>
     <GROUP id="{35F046FE-E9C7-3C6D-E727-B28083BEED8E}" name="Assets">
-      <FILE id="RZYkBB" name="kadenze_knob.png" compile="0" resource="1"
-            file="../kadenze_knob.png"/>
-      <FILE id="UjXcHc" name="kadenze_bg.png" compile="0" resource="1" file="../kadenze_bg.png"
-            xcodeResource="0"/>
+      <FILE id="Eg4Rws" name="kadenze_knob.png" compile="0" resource="1"
+            file="Assets/kadenze_knob.png"/>
+      <FILE id="lNLYG7" name="kadenze_bg.png" compile="0" resource="1" file="Assets/kadenze_bg.png"/>
     </GROUP>
     <GROUP id="{39B004F2-71C3-8F03-A35C-318A020AA5C4}" name="Managers">
       <FILE id="IAtXN2" name="KAPPresetManager.cpp" compile="1" resource="0"
@@ -103,21 +103,21 @@
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="KadenzeAudioPlugin"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_core" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_events" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_graphics" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_data_structures" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_cryptography" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_video" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_opengl" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_audio_basics" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_audio_devices" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_audio_formats" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_audio_processors" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_audio_plugin_client" path="../../../../Development/juce-grapefruit-osx/modules"/>
-        <MODULEPATH id="juce_audio_utils" path="../../../../Development/juce-grapefruit-osx/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_video" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../Development/JUCE-6.0.8/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
@@ -139,5 +139,8 @@
     <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_video" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
   </MODULES>
-  <JUCEOPTIONS JUCE_QUICKTIME="disabled"/>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
 </JUCERPROJECT>

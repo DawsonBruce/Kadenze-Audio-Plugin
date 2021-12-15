@@ -27,5 +27,5 @@ public:
     
 private:
     
-    ScopedPointer<KAPParameterComboBox> mFxType;
+    std::unique_ptr<KAPParameterComboBox> mFxType;
 };

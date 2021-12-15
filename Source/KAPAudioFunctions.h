@@ -58,3 +58,10 @@ inline float kap_linear_interp (float v0, float v1, float t)
 {
     return (1 - t) * v0 + t * v1;
 }
+
+/** rational tanh approximation
+    url: https://www.musicdsp.org/en/latest/Other/238-rational-tanh-approximation.html?highlight=tanh*/
+inline double tanh_clip(double inValue)
+{
+    return inValue * ( 27 + inValue * inValue ) / ( 27 + 9 * inValue * inValue );
+}

@@ -79,12 +79,12 @@ private:
     /** internal */
     void initializeParameters();
     
-    ScopedPointer<KAPPresetManager> mPresetManager;
+    std::unique_ptr<KAPPresetManager> mPresetManager;
     
-    ScopedPointer<KAPDelay> mDelay [kMaxNumChannels];
-    ScopedPointer<KAPLfo> mLfo [kMaxNumChannels];
-    ScopedPointer<KAPGain> mInputGain [kMaxNumChannels];
-    ScopedPointer<KAPGain> mOutputGain [kMaxNumChannels];
+    std::unique_ptr<KAPDelay> mDelay [kMaxNumChannels];
+    std::unique_ptr<KAPLfo> mLfo [kMaxNumChannels];
+    std::unique_ptr<KAPGain> mInputGain [kMaxNumChannels];
+    std::unique_ptr<KAPGain> mOutputGain [kMaxNumChannels];
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KadenzeAudioPluginAudioProcessor)

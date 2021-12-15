@@ -21,6 +21,10 @@ class KAPPanelBase
 public:
     KAPPanelBase(KadenzeAudioPluginAudioProcessor* processor);
     ~KAPPanelBase();
+
+    void mouseEnter(const MouseEvent& event) override;
+    
+    void mouseExit(const MouseEvent& event) override;
     
     void paint(Graphics& g) override;
     

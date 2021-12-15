@@ -26,12 +26,12 @@ KAPCenterPanelMenuBar::KAPCenterPanelMenuBar(KadenzeAudioPluginAudioProcessor* p
 
     int value = *processor->parameters.getRawParameterValue(KAPParameterID[kParameter_DelayType]);
     
-    mFxType = new KAPParameterComboBox(mProcessor->parameters,
+    mFxType = std::make_unique<KAPParameterComboBox>(mProcessor->parameters,
                                        KAPParameterID[kParameter_DelayType]);
     mFxType->addItemList(fxTypes, 1);
     mFxType->setSelectedItemIndex(value, dontSendNotification);
     mFxType->setBounds(CENTER_PANEL_MENU_BAR_WIDTH - comboBox_w, 0, comboBox_w, comboBox_h);
-    addAndMakeVisible(mFxType);
+    addAndMakeVisible(mFxType.get());
 }
 
 KAPCenterPanelMenuBar::~KAPCenterPanelMenuBar()

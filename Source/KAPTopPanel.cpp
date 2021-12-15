@@ -21,33 +21,45 @@ KAPTopPanel::KAPTopPanel(KadenzeAudioPluginAudioProcessor* processor)
     int button_w = 55;
     int button_h = 25;
     
-    mNewPreset = new TextButton();
-    mNewPreset->setButtonText("NEW");
+    mNewPreset = std::make_unique<TextButton>("NEW");
     mNewPreset->setBounds(button_x, button_y, button_w, button_h);
-    mNewPreset->addListener(this);
-    addAndMakeVisible(mNewPreset);
+    mNewPreset->onClick = [this]{
+        mProcessor->getPresetManager()->createNewPreset();
+        updatePresetComboBox();
+    };
+    addAndMakeVisible(mNewPreset.get());
     button_x = button_x + button_w;
     
-    mSavePreset = new TextButton();
-    mSavePreset->setButtonText("SAVE");
+    mSavePreset = std::make_unique<TextButton>("SAVE");
     mSavePreset->setBounds(button_x, button_y, button_w, button_h);
-    mSavePreset->addListener(this);
-    addAndMakeVisible(mSavePreset);
+    mSavePreset->onClick = [this]{
+        if(mProcessor->getPresetManager()->getIsCurrentPresetSaved()){
+            mProcessor->getPresetManager()->savePreset();
+        } else {
+            displaySaveAsPopup();
+        }
+        updatePresetComboBox();
+    };
+    addAndMakeVisible(mSavePreset.get());
     button_x = button_x + button_w;
     
-    mSaveAsPreset = new TextButton();
-    mSaveAsPreset->setButtonText("SAVE AS");
+    mSaveAsPreset = std::make_unique<TextButton>("SAVE AS");
     mSaveAsPreset->setBounds(button_x, button_y, button_w, button_h);
-    mSaveAsPreset->addListener(this);
-    addAndMakeVisible(mSaveAsPreset);
+    mSaveAsPreset->onClick = [this]{
+        displaySaveAsPopup();
+        updatePresetComboBox();
+    };
+    addAndMakeVisible(mSaveAsPreset.get());
     
     const int comboBox_w = 200;
     const int comboBox_x = TOP_PANEL_WIDTH*0.5 - comboBox_w*0.5;
     
-    mPresetDisplay = new ComboBox();
+    mPresetDisplay = std::make_unique<ComboBox>();
     mPresetDisplay->setBounds(comboBox_x, button_y, comboBox_w, button_h);
-    mPresetDisplay->addListener(this);
-    addAndMakeVisible(mPresetDisplay);
+    mPresetDisplay->onChange = [this]{
+        mProcessor->getPresetManager()->loadPreset(mPresetDisplay->getSelectedItemIndex());
+    };
+    addAndMakeVisible(mPresetDisplay.get());
     
     updatePresetComboBox();
 }
@@ -89,41 +101,6 @@ void KAPTopPanel::displaySaveAsPopup()
         String presetName = window.getTextEditor("presetName")->getText();
         presetManager->saveAsPreset(presetName);
     }
-}
-
-void KAPTopPanel::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
-{
-    if(comboBoxThatHasChanged == mPresetDisplay){
-        
-        KAPPresetManager* presetManager = mProcessor->getPresetManager();
-        presetManager->loadPreset(mPresetDisplay->getSelectedItemIndex());
-    }
-}
-
-void KAPTopPanel::buttonClicked(Button* b)
-{
-    KAPPresetManager* presetManager = mProcessor->getPresetManager();
-    
-    if(b == mNewPreset){
-        
-        presetManager->createNewPreset();
-    }
-    
-    else if(b == mSavePreset){
-     
-        if(presetManager->getIsCurrentPresetSaved()){
-            presetManager->savePreset();
-        } else {
-            displaySaveAsPopup();
-        }
-    }
-    
-    else if(b == mSaveAsPreset){
-        
-        displaySaveAsPopup();
-    }
-    
-    updatePresetComboBox();
 }
 
 void KAPTopPanel::updatePresetComboBox()

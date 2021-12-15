@@ -28,6 +28,6 @@ public:
     
 private:
     
-    ScopedPointer<KAPParameterSlider> mGain;
-    ScopedPointer<KAPVuMeter> mVuMeter;
+    std::unique_ptr<KAPParameterSlider> mGain;
+    std::unique_ptr<KAPVuMeter> mVuMeter;
 };

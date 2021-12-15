@@ -34,10 +34,10 @@ private:
     
     Image mBackground;
     
-    ScopedPointer<KAPLookAndFeel> mLookAndFeel;
-    ScopedPointer<KAPMainPanel> mMainPanel;
-    ScopedPointer<KAPParameterSlider> mParameterSlider[kParameter_TotalNumParameters];
-    ScopedPointer<Label> mLabel[kParameter_TotalNumParameters];
+    std::unique_ptr<KAPLookAndFeel> mLookAndFeel;
+    std::unique_ptr<KAPMainPanel> mMainPanel;
+    std::unique_ptr<KAPParameterSlider> mParameterSlider[kParameter_TotalNumParameters];
+    std::unique_ptr<Label> mLabel[kParameter_TotalNumParameters];
     
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

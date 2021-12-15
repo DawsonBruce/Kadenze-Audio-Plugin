@@ -26,8 +26,8 @@ public:
     
 private:
     
-    ScopedPointer<KAPTopPanel> mTopPanel;
-    ScopedPointer<KAPGainPanel> mInputGainPanel;
-    ScopedPointer<KAPGainPanel> mOutputputGainPanel;
-    ScopedPointer<KAPCenterPanel> mCenterPanel;
+    std::unique_ptr<KAPTopPanel> mTopPanel;
+    std::unique_ptr<KAPGainPanel> mInputGainPanel;
+    std::unique_ptr<KAPGainPanel> mOutputputGainPanel;
+    std::unique_ptr<KAPCenterPanel> mCenterPanel;
 };

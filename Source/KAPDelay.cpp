@@ -41,7 +41,7 @@ void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inW
 {
     const float wet = inWetDry;
     const float dry = 1.f - wet;
-    const float feedbackMapped = (inType==kKAPDelayType_Delay) ? jmap(inFeedback, 0.f, 1.f, 0.f, 0.95f) : 0.f;
+    const float feedbackMapped = (inType==kKAPDelayType_Delay) ? jmap(inFeedback, 0.f, 1.f, 0.f, 1.2f) : 0.f;
         
     for(int i = 0; i < inNumSamplesToRender; i++){
     
@@ -55,7 +55,7 @@ void KAPDelay::process(float* inAudio, float inTime, float inFeedback, float inW
         const double delayTimeInSamples = (mSampleRate * mTimeSmoothed);
         const double sample = getInterpolatedSample(delayTimeInSamples);
         
-        mBuffer[mDelayIndex] = inAudio[i] + (mFeedbackSample * feedbackMapped);
+        mBuffer[mDelayIndex] = tanh_clip(inAudio[i] + (mFeedbackSample * feedbackMapped));
         
         kapassert_isnan(sample);
         
