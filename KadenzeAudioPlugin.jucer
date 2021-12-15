@@ -3,16 +3,15 @@
 <JUCERPROJECT id="pf92i2" name="KadenzeAudioPlugin" displaySplashScreen="1"
               reportAppUsage="1" splashScreenColour="Dark" projectType="audioplug"
               version="1.0.0" bundleIdentifier="com.yourcompany.KadenzeAudioPlugin"
-              includeBinaryInAppConfig="1" cppLanguageStandard="11" buildVST="0"
-              buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0" buildAAX="0"
-              buildStandalone="1" enableIAA="0" pluginName="KadenzeAudioPlugin"
-              pluginDesc="KadenzeAudioPlugin" pluginManufacturer="yourcompany"
-              pluginManufacturerCode="Manu" pluginCode="Pf92" pluginChannelConfigs=""
-              pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
-              pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0" pluginAUExportPrefix="KadenzeAudioPluginAU"
-              pluginRTASCategory="" aaxIdentifier="com.yourcompany.KadenzeAudioPlugin"
-              pluginAAXCategory="2" pluginFormats="buildAU,buildStandalone,buildVST3"
-              jucerFormatVersion="1">
+              includeBinaryInAppConfig="1" buildVST="0" buildVST3="1" buildAU="1"
+              buildAUv3="0" buildRTAS="0" buildAAX="0" buildStandalone="1"
+              enableIAA="0" pluginName="KadenzeAudioPlugin" pluginDesc="KadenzeAudioPlugin"
+              pluginManufacturer="yourcompany" pluginManufacturerCode="Manu"
+              pluginCode="Pf92" pluginChannelConfigs="" pluginIsSynth="0" pluginWantsMidiIn="0"
+              pluginProducesMidiOut="0" pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0"
+              pluginAUExportPrefix="KadenzeAudioPluginAU" pluginRTASCategory=""
+              aaxIdentifier="com.yourcompany.KadenzeAudioPlugin" pluginAAXCategory="2"
+              pluginFormats="buildAU,buildStandalone,buildVST3" jucerFormatVersion="1">
   <MAINGROUP id="rSokST" name="KadenzeAudioPlugin">
     <GROUP id="{CD103D61-05C5-5B5F-0B6E-F2A22800253F}" name="LookAndFeel">
       <FILE id="qi7TTv" name="KAPLookAndFeel.h" compile="0" resource="0"
@@ -103,21 +102,21 @@
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="KadenzeAudioPlugin"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_core" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_events" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_graphics" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_data_structures" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_cryptography" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_video" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_opengl" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_audio_basics" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_audio_devices" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_audio_formats" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_audio_processors" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_audio_plugin_client" path="../../../../Development/JUCE-6.0.8/modules"/>
-        <MODULEPATH id="juce_audio_utils" path="../../../../Development/JUCE-6.0.8/modules"/>
+        <MODULEPATH id="juce_core" path="JuceModules/"/>
+        <MODULEPATH id="juce_events" path="JuceModules/"/>
+        <MODULEPATH id="juce_graphics" path="JuceModules/"/>
+        <MODULEPATH id="juce_data_structures" path="JuceModules/"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceModules/"/>
+        <MODULEPATH id="juce_gui_extra" path="JuceModules/"/>
+        <MODULEPATH id="juce_cryptography" path="JuceModules/"/>
+        <MODULEPATH id="juce_video" path="JuceModules/"/>
+        <MODULEPATH id="juce_opengl" path="JuceModules/"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceModules/"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceModules/"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceModules/"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceModules/"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="JuceModules/"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceModules/"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
